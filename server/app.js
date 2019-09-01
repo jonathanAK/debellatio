@@ -1,6 +1,7 @@
 const express = require('express');
 const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
+const path = require('path');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cookieSession({
 app.get('/', (req, res) => {
     res.render('join');
 });
+app.use('/resources',express.static('public'));
 
 app.listen(4000,()=>{
     console.log('listening on http://localhost:4000/');
