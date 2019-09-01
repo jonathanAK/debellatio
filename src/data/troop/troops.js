@@ -1,5 +1,5 @@
 import {TroopType} from './troop.types';
-export const Troops = 
+export const Troops =
 [
     {
         "id":0,
@@ -180,4 +180,4 @@ export const Troops =
         "army":'D',
 
     }
-]
+];

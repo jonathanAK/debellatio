@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.commandSheet-image{
+  max-width:65px;
+  width:40%;
+}

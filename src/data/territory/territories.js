@@ -1,7 +1,7 @@
 import {CapitalTypes} from './capital.types';
 import {TerritoryTypes} from './territory.types';
-import {CountryNames} from './territory.types';
-export const Territories = 
+import {CountryNames} from './country.names';
+export const Territories =
 [
     {
         "id":0,
@@ -188,7 +188,7 @@ export const Territories =
         "name":'18',
         "location":18,
         "capital": null,
-        "country":CountryNames.F, 
+        "country":CountryNames.F,
         "type":TerritoryTypes.Sea,
         "borders":[11,10,9,17,26,27,28,19],
         "army":'F'
@@ -288,7 +288,7 @@ export const Territories =
         "name":'28',
         "location":28,
         "capital": null,
-        "country":CountryNames.G, 
+        "country":CountryNames.G,
         "type":TerritoryTypes.Coast,
         "borders":[19,27,37,29],
         "army":'G'
@@ -408,7 +408,7 @@ export const Territories =
         "name":'40',
         "location":40,
         "capital": null,
-        "country":CountryNames.C, 
+        "country":CountryNames.C,
         "type":TerritoryTypes.Coast,
         "borders":[32,39,46,41],
         "army":'C'
@@ -513,4 +513,4 @@ export const Territories =
         "borders":[44,49],
         "army":'D'
     }
-]
+];
