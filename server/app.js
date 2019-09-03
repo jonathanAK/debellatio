@@ -8,6 +8,7 @@ const routesAuth = require('./routes/routes-auth');
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 
 // set view engine
 app.set('view engine', 'ejs');
@@ -24,6 +25,11 @@ app.use('/auth',routesAuth);
 // Join page
 app.get('/', (req, res) => {
     res.render('join');
+});
+
+// Join page
+app.get('/waiting', (req, res) => {
+    res.render('waiting');
 });
 
 
