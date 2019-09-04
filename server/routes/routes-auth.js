@@ -18,7 +18,9 @@ router.post('/new',(req,res)=>{
             }
             gameQue.push(gameSetting);
             req.session.id=userID;
-            res.send(gameSetting.code);
+            // res.send(gameSetting.code);
+            res.redirect(`/waiting/${gameSetting.code}`);
+
         }else{
             throw ("no name or name invalid");
         }

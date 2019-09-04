@@ -27,9 +27,17 @@ app.get('/', (req, res) => {
     res.render('join');
 });
 
-// Join page
+// Join page with login ID
 app.get('/waiting', (req, res) => {
-    res.render('waiting');
+    res.render('waiting', {id:false});
+});
+// Join page without login ID
+app.get('/waiting/:id', (req, res) => {
+    res.render('waiting', {id:req.params.id});
+});
+
+app.get('/new', (req, res) => {
+    res.render('newGame');
 });
 
 

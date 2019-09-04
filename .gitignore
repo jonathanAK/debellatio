@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+#secret
+/server/config/keys.js
+
 # dependencies
 client/node_modules
 server/node_modules
@@ -13,6 +16,7 @@ server/node_modules
 /build
 
 # misc
+.idea
 .DS_Store
 .env.local
 .env.development.local
@@ -22,4 +26,3 @@ server/node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/server/config/keys.js
