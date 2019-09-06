@@ -37,6 +37,19 @@
             font-size: 70px;
         }
 
+        h2 {
+            color: White;
+            text-shadow: 4px 4px #000000;
+            margin: auto auto 30px auto;
+            font-family: "Arial Black", Gadget, sans-serif;
+            font-weight: 100;
+            font-size: 40px;
+        }
+
+        .hidden{
+            display:none;
+        }
+
         .login-input {
             display: block;
             margin: auto auto 10px;
@@ -55,7 +68,7 @@
             transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
         }
 
-        #startButton {
+        .startButton {
             display: inline-block;
             min-width: 6.25rem;
             max-width: 18.75rem;
@@ -67,7 +80,7 @@
             font-weight: 700;
             font-size: 20px;
             font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-            margin: auto;
+            margin: auto auto 70px auto;
             padding: 0.25rem 0.875rem;
             border-width: 0.0625rem;
             border-style: solid;
@@ -79,16 +92,95 @@
             cursor: pointer;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script>
+        const socket = io();
+    </script>
 </head>
 <body>
-<main>
+<main id="joinView">
     <h1>Debellatio</h1>
-    <form method="post" action="/auth/join">
-        <input id="nameBox" class="login-input" name="name" placeholder="Name"/>
+    <form>
+        <input id="joinNameBox" class="login-input" name="name" placeholder="Name"/>
         <input id="pinBox" class="login-input" name="id" placeholder="Game PIN"/>
-        <input type="submit" id="startButton" value="Join Now"/>
-        <!--        <button type="submit" id="startButton" >Join Now</button>-->
+
     </form>
+    <button class="startButton" onclick="joinGame()">Join Now</button>
+    <button class="startButton" onclick="setNewGameView()">Create New game</button>
 </main>
+
+<main id="newGameView" class="hidden">
+    <h1>Debellatio</h1>
+    <input id="createNameBox" class="login-input" name="name" placeholder="Name"/>
+    <button class="startButton" onclick="newGame()">Create New Game</button>
+    <button class="startButton" onclick="setJoinView()">Join a Game</button>
+</main>
+
+<main id="waitingView" class="hidden">
+    <h1>Waiting for Players to Join</h1>
+<!--    <button id="startButton" class="hidden startButton" onclick="startGame()">Start Game</button>-->
+    <h1 id="pinCodeDisplay"></h1>
+    <h2 id="playerList"></h2>
+</main>
+
+<script>
+    const waitingView =  document.querySelector('#waitingView');
+    const newGameView =  document.querySelector('#newGameView');
+    const joinView =  document.querySelector('#joinView');
+
+    // const startButton =  document.querySelector('#startButton');
+    const pinBox =  document.querySelector('#pinBox');
+    const joinNameBox =  document.querySelector('#joinNameBox');
+    const createNameBox =  document.querySelector('#createNameBox');
+    const pinCodeDisplay =  document.querySelector('#pinCodeDisplay');
+    const playerListView =  document.querySelector('#playerList');
+
+    socket.on('gameCreated',gameID=>{
+        pinCodeDisplay.innerHTML=gameID;
+        newGameView.classList.add("hidden");
+        waitingView.classList.remove("hidden");
+        // startButton.classList.remove("hidden");
+    });
+
+    socket.on('playerJoined',playerList=>{
+        console.log(playerList);
+        let listOfPendingPlayers="";
+        playerList.forEach(player=>{listOfPendingPlayers+=`${player.name}<br>`});
+        playerListView.innerHTML = listOfPendingPlayers;
+        joinView.classList.add("hidden");
+        waitingView.classList.remove("hidden");
+    });
+
+    function setNewGameView() {
+        newGameView.classList.remove("hidden");
+        joinView.classList.add("hidden");
+    }
+
+    function setJoinView() {
+        joinView.classList.remove("hidden");
+        newGameView.classList.add("hidden");
+    }
+
+    function newGame() {
+        const gameSetting={
+            name:createNameBox.value
+        };
+        socket.emit('newGame', gameSetting);
+    }
+
+    function joinGame() {
+        const msg={
+            name:joinNameBox.value,
+            id:pinBox.value
+        };
+        socket.emit('joinGame', msg);
+    }
+
+    // function startGame() {
+    //     socket.emit('startGame', true);
+    // }
+
+</script>
+
 </body>
 </html>
