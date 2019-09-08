@@ -1,5 +1,5 @@
-const cookieSession = require('cookie-session');
-const keys = require('./config/keys');
+// const cookieSession = require('cookie-session');
+// const keys = require('./config/keys');
 const express = require('express');
 const app = express();
 
@@ -17,11 +17,11 @@ app.use(express.urlencoded({ extended: true }));
 // set view engine
 app.set('view engine', 'ejs');
 
-//set up Authentication cookies
-app.use(cookieSession({
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-    keys:[keys.session.cookieKey]
-}));
+// //set up Authentication cookies
+// app.use(cookieSession({
+//     maxAge: 1000 * 60 * 60 * 24 * 7,
+//     keys:[keys.session.cookieKey]
+// }));
 //set up Views
 app.use('/resources',express.static('public'));
 
@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
     res.render('join');
 });
 
-server.listen(4000,()=>{
+const PORT = process.env.PORT || 4000;	//process.env.PORT is used by heroku
+server.listen(PORT,()=>{
     console.log('listening on http://localhost:4000/');
 });
