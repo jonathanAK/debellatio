@@ -40,10 +40,6 @@ h2 {
   font-size: 40px;
 }
 
-.hidden{
-  display:none;
-}
-
 .login-input {
   display: block;
   margin: auto auto 10px;
