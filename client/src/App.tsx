@@ -1,16 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
+import {connect} from "react-redux";
 import './App.css';
-import CommandSheet from './components/CommandSheet/CommandSheet';
-import {Troops} from "./data/troop/troops";
-import {Territories} from "./data/territory/territories";
+import {ActiveViewEnum} from './models/ActiveView';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <CommandSheet troops={Troops} army={'D'} territory={Territories} commandSubmit={()=>{console.log('ggg')} }/>
-    </div>
-  );
+//Import Pages
+import JoinPage from './pages/JoinPage';
+import CreateGamePage from './pages/CreateGamePage';
+import WaitingForPlayersPage from './pages/WaitingForPlayersPage';
+
+interface IProp {
+  activeView: ActiveViewEnum
 }
 
-export default App;
+const App: React.FC<IProp> = ({activeView}) => {
+  const view = getActiveView();
+  function getActiveView(): JSX.Element | undefined {
+    switch (activeView) {
+      case ActiveViewEnum.Join:
+        return <JoinPage/>;
+      case ActiveViewEnum.CreateGame:
+        return <CreateGamePage/>;
+      case ActiveViewEnum.WaitingForPlayers:
+        return <WaitingForPlayersPage/>;
+    }
+    return;
+  }
+  return (
+      <>
+      {view}
+      </>
+  );
+};
+
+const mapStateToProps = (state: any) => {
+  return {
+    activeView: state.views,
+  }
+};
+
+export default connect(mapStateToProps)(App);
