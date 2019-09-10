@@ -7,3 +7,14 @@ install: npm install
 
 script:
   - npm run test
+  - (cd client && npm run build && cd..)
+  - mv ./client/build/* ./server/public
+
+before_deploy:
+  cd server
+
+deploy:
+  provider: heroku
+  api_key:
+    secure:
+    app: quotes-server-stage
