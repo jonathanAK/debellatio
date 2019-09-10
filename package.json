@@ -2,12 +2,13 @@
   "name": "debellatio",
   "version": "1.0.0",
   "dependencies": {
-
+    "jest": "^24.9.0"
   },
   "scripts": {
     "build": "(cd client && npm run build && cd..)",
     "postbuild": "xcopy /e /y \"./client/build\" \"./server/public\"",
     "predeploy": "npm run build",
-    "deploy": "git subtree push --prefix server heroku master"
+    "deploy": "git subtree push --prefix server heroku master",
+    "test": "jest"
   }
 }
