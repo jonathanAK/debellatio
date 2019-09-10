@@ -1,9 +1,7 @@
 {
   "name": "debellatio",
   "version": "1.0.0",
-  "dependencies": {
-    "jest": "^24.9.0"
-  },
+  "dependencies": {},
   "scripts": {
     "build": "(cd client && npm run build && cd..)",
     "postbuild": "xcopy /e /y \"./client/build\" \"./server/public\"",
