@@ -6,13 +6,14 @@
     "cookie-session": "^1.3.3",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
+    "jest": "^24.9.0",
     "socket.io": "^2.2.0"
   },
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "test"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC"
