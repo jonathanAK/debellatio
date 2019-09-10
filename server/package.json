@@ -12,7 +12,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "test"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC"

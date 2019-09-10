@@ -1,5 +1,6 @@
-import {combineReducers, createStore} from 'redux'
+import {combineReducers, createStore, applyMiddleware} from 'redux'
 import viewsReducer from "./views.reducer";
+// import socketMiddleware from "./socketMiddleware";
 
 export default function configureStore() {
     // combine all reducers to create  root reducer
@@ -7,4 +8,5 @@ export default function configureStore() {
         views:viewsReducer
     });
     return createStore(rootReducer);
+    // return createStore(rootReducer,applyMiddleware(socketMiddleware()));
 }
