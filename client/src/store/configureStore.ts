@@ -1,12 +1,13 @@
-import {combineReducers, createStore, applyMiddleware} from 'redux'
+import {combineReducers, createStore} from 'redux'
 import viewsReducer from "./views.reducer";
-// import socketMiddleware from "./socketMiddleware";
+import miscReducer from "./misc.reducer";
+
 
 export default function configureStore() {
     // combine all reducers to create  root reducer
     const rootReducer = combineReducers({
-        views:viewsReducer
+        views:viewsReducer,
+        misc:miscReducer
     });
     return createStore(rootReducer);
-    // return createStore(rootReducer,applyMiddleware(socketMiddleware()));
-}
+};

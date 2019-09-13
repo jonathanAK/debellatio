@@ -23,7 +23,10 @@ app.set('view engine', 'ejs');
 //     keys:[keys.session.cookieKey]
 // }));
 //set up Views
-app.use('/resources',express.static('public'));
+
+
+//app.use('/resources',express.static('public'));
+app.use('/',express.static('public'));
 
 
 app.get('/', (req, res) => {
