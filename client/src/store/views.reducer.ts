@@ -16,8 +16,7 @@ const storeInit = ActiveViewEnum.Join;
 const viewsReducer = (state:ActiveViewEnum = storeInit, action: Action) => {
     switch (action.type) {
         case DEBELLATIO_SET_VIEW:
-            state = action.payload;
-            break;
+            return action.payload;
     }
     return state;
 };

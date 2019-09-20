@@ -38,6 +38,7 @@ module.exports = (io,gameQue) => {
                     if (gameQue[queIndex].players.length < gameQue[queIndex].maxPlayers && !gameQue[queIndex].players.some(player => player.id == userId)) {
                         gameQue[queIndex].players.push({name:msg.name,id:userId});
                         socket.join(msg.id);
+                        socket.emit('gameJoined');
                         io.in(gameId).emit('playerJoined', gameQue[queIndex].players);
                     }
                 } else {
