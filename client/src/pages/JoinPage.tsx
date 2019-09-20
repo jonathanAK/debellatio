@@ -3,24 +3,21 @@ import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import { debellatioSetView } from '../store/views.reducer';
 import {ActiveViewEnum} from '../models/ActiveView';
-import {joinGame} from "../services/socketAPI";
-import { debellatioSetPlayers } from '../store/misc.reducer';
-
+import {sendSocketMessage} from "../store/socketMiddleware";
 
 interface IProps {
     goToCreateGame:() => void
-    joinedGame:() => void
-    playerJoined:(payload:any) => void
+    joinGame:(payload:object)=>void
 }
 
-const JoinPage: React.FC<IProps> = ({goToCreateGame,joinedGame,playerJoined}) => {
+const JoinPage: React.FC<IProps> = ({goToCreateGame,joinGame}) => {
     const [name, setname] = useState('');
     const handleNameChange = (e:React.ChangeEvent<HTMLInputElement>) => setname(e.target.value);
     const [gamePin, setGamePin] = useState('');
     const handleGamePinChange = (e:React.ChangeEvent<HTMLInputElement>) => setGamePin(e.target.value);
 
     const joinNewGame = () =>{
-        joinGame({name, code:gamePin},{joinedGame,playerJoined});
+        joinGame({name, id:gamePin});
     };
 
 
@@ -42,11 +39,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     goToCreateGame: () => {
         dispatch(debellatioSetView (ActiveViewEnum.CreateGame));
     },
-    joinedGame: () =>{
-        dispatch(debellatioSetView (ActiveViewEnum.WaitingForPlayers));
-    },
-    playerJoined: (payload:any) =>{
-        dispatch(debellatioSetPlayers (payload));
+    joinGame: (payload:object) =>{
+        dispatch(sendSocketMessage('joinGame',payload));
     }
 });
 
