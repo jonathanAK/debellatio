@@ -8,6 +8,7 @@ import JoinPage from './pages/JoinPage';
 import CreateGamePage from './pages/CreateGamePage';
 import WaitingForPlayersPage from './pages/WaitingForPlayersPage';
 import QaBar from './components/QA/QaBar';
+import PlayPage from './pages/PlayPage';
 
 interface IProp {
   activeView: ActiveViewEnum
@@ -23,6 +24,8 @@ const App: React.FC<IProp> = ({activeView}) => {
         return <CreateGamePage/>;
       case ActiveViewEnum.WaitingForPlayers:
         return <WaitingForPlayersPage/>;
+      case ActiveViewEnum.PLayPage:
+        return <PlayPage/>;
     }
     return;
   }
@@ -36,7 +39,7 @@ const App: React.FC<IProp> = ({activeView}) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    activeView: state.views,
+    activeView: state.views.activeView,
   }
 };
 

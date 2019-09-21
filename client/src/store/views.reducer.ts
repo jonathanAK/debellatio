@@ -1,5 +1,6 @@
 import {ActiveViewEnum} from '../models/ActiveView';
 import {Action} from '../models/Action';
+import {GamePhaseEnum} from "../models/GamePhase";
 
 const DEBELLATIO_SET_VIEW = '[DEBELLATION] VIEW_SET';
 
@@ -11,12 +12,18 @@ export const debellatioSetView = (payload: ActiveViewEnum) => {
     }
 };
 
-const storeInit = ActiveViewEnum.Join;
+const storeInit = {
+    activeView:ActiveViewEnum.Join,
+    gamePhase:GamePhaseEnum.GameMaster
+};
 
-const viewsReducer = (state:ActiveViewEnum = storeInit, action: Action) => {
+const viewsReducer = (state:{} = storeInit, action: Action) => {
     switch (action.type) {
         case DEBELLATIO_SET_VIEW:
-            return action.payload;
+            return {
+                ...state,
+                activeView:action.payload
+            };
     }
     return state;
 };
