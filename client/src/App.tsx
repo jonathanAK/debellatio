@@ -7,6 +7,7 @@ import {ActiveViewEnum} from './models/ActiveView';
 import JoinPage from './pages/JoinPage';
 import CreateGamePage from './pages/CreateGamePage';
 import WaitingForPlayersPage from './pages/WaitingForPlayersPage';
+import QaBar from './components/QA/QaBar';
 
 interface IProp {
   activeView: ActiveViewEnum
@@ -27,6 +28,7 @@ const App: React.FC<IProp> = ({activeView}) => {
   }
   return (
       <>
+        <QaBar/>
       {view}
       </>
   );
