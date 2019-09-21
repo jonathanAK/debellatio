@@ -22,7 +22,7 @@ const storeInit = {
     players: []
 };
 
-const viewsReducer = (state:{} = storeInit, action: Action) => {
+const miscReducer = (state:{} = storeInit, action: Action) => {
     switch (action.type) {
         case DEBELLATIO_SET_GAME_CODE:
             return {
@@ -38,4 +38,4 @@ const viewsReducer = (state:{} = storeInit, action: Action) => {
     return state;
 };
 
-export default viewsReducer;
+export default miscReducer;

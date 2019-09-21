@@ -1,5 +1,6 @@
 export enum ActiveViewEnum {
   Join,
   CreateGame,
-  WaitingForPlayers
+  WaitingForPlayers,
+  PLayPage
 }
