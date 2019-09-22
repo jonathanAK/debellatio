@@ -1,6 +1,8 @@
+const Debellatio = require("../debellatio/Debellatio");
+
 const {uniqueGameCode} = require('../misc/nonce.js');
 
-module.exports = (io,gameQue) => {
+module.exports = (io,gameQue,liveGames) => {
     io.on('connection', function(socket){
         console.log(`a user connected, user ID:${socket.id}`);
         socket.on('newGame', msg =>{
@@ -12,7 +14,7 @@ module.exports = (io,gameQue) => {
                         code:gameId,
                         seasons:(msg.seasons && msg.seasons == 4?4:2),
                         seasonLength:(msg.seasonLength && msg.seasonLength >=1 && msg.seasonLength <= 30 ? msg.seasonLength:6),
-                        firstSeason:(msg.firstSeason && msg.firstSeason >=1 && rmsg.firstSeason <= 30 ? msg.firstSeason:12),
+                        firstSeason:(msg.firstSeason && msg.firstSeason >=1 && msg.firstSeason <= 30 ? msg.firstSeason:12),
                         maxPlayers:(msg.maxPlayers && msg.maxPlayers >=4 && msg.maxPlayers <= 7 ? msg.maxPlayers:7),
                         GM:(msg.GM && msg.GM == true ? true:false),
                         players:[{name:msg.name.substring(0,30),id:userID}]
@@ -24,8 +26,8 @@ module.exports = (io,gameQue) => {
                 }else{
                     throw ("no name or name invalid");
                 }
-            }catch{
-                console.log("Received bad JSON");
+            }catch(e){
+                console.log("Received bad JSON",e);
             }
         });
 
@@ -44,12 +46,18 @@ module.exports = (io,gameQue) => {
                 } else {
                     throw('game does not exist');
                 }
-            }catch {
-                console.log(`invalid game requested.`);
+            }catch(e){
+                console.log(`invalid game requested.`,e);
             }
         });
 
-        socket.on('startGame',msg =>{});
+        socket.on('startGame',msg =>{
+            const queIndex = gameQue.findIndex(item => item.players[0].id === socket.id);
+            if(queIndex!==-1){
+                liveGames.push(new Debellatio(gameQue[queIndex].code,gameQue[queIndex].players));
+                gameQue.splice(queIndex, 1);
+            }
+        });
 
         socket.on('dispatchOrders',msg =>{});
     });

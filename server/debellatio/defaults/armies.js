@@ -1,39 +1,32 @@
 const armies =[
     {
         "id":0,
-        "name":ArmyTypes.A,
-        "troops": [0,1,4]
+        "name":"A"
     },
     {
         "id":1,
-        "name": ArmyTypes.B,
-        "troops": [3,6,7]
+        "name": "B"
     },
     {
         "id":2,
-        "name": ArmyTypes.C,
-        "troops": [9,14,17,20]
+        "name": "C"
     },
     {
         "id":3,
-        "name": ArmyTypes.D,
-        "troops": [18,21,22]
+        "name": "D"
     },
     {
         "id":4,
-        "name": ArmyTypes.E,
-        "troops": [8,10,11,15]
+        "name": "E"
     },
     {
         "id":5,
-        "name": ArmyTypes.F,
-        "troops": [12,16,19]
+        "name": "F"
     },
     {
         "id":6,
-        "name": ArmyTypes.G,
-        "troops": [2,5,13]
+        "name": "G"
     }
 ];
 
-export default JSON.stringify(armies);
+module.exports = JSON.stringify(armies);
