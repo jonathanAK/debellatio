@@ -6,7 +6,7 @@ import {sendSocketMessage} from "../store/socketMiddleware";
 interface IProps {
     joinCode:string
     players:any
-    startGame:()=>void
+    startGame:(gameId:string)=>void
 }
 
 const WaitingForPlayersPage: React.FC<IProps> = ({joinCode,players,startGame}) => {
@@ -14,7 +14,7 @@ const WaitingForPlayersPage: React.FC<IProps> = ({joinCode,players,startGame}) =
         <main id="waitingView">
             <h1>Waiting for Players to Join</h1>
             <h1 id="pinCodeDisplay">{joinCode}</h1>
-            {joinCode !== "" && <button className="startButton"  onClick={startGame}>Start Game</button>}
+            {joinCode !== "" && <button className="startButton"  onClick={()=>{startGame(joinCode)}}>Start Game</button>}
             {
                 players.map((player:any)=>(
                     <h2>{player.name}</h2>
@@ -32,8 +32,8 @@ const mapStateToProps = (state:any) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    startGame:()=>{
-        dispatch(sendSocketMessage('startGame'));
+    startGame:(gameId:string)=>{
+        dispatch(sendSocketMessage('startGame',{gameId}));
     }
 });
 
