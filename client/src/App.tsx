@@ -9,6 +9,7 @@ import CreateGamePage from './pages/CreateGamePage';
 import WaitingForPlayersPage from './pages/WaitingForPlayersPage';
 import QaBar from './components/QA/QaBar';
 import PlayPage from './pages/PlayPage';
+import SummaryPage from "./pages/SummaryPage";
 
 interface IProp {
   activeView: ActiveViewEnum
@@ -26,6 +27,8 @@ const App: React.FC<IProp> = ({activeView}) => {
         return <WaitingForPlayersPage/>;
       case ActiveViewEnum.PLayPage:
         return <PlayPage/>;
+      case ActiveViewEnum.Summary:
+        return <SummaryPage/>;
     }
     return;
   }

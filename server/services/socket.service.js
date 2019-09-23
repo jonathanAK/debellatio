@@ -54,8 +54,11 @@ module.exports = (io,gameQue,liveGames) => {
         socket.on('startGame',msg =>{
             const queIndex = gameQue.findIndex(item => item.players[0].id === socket.id);
             if(queIndex!==-1){
-                liveGames.push(new Debellatio(gameQue[queIndex].code,gameQue[queIndex].players));
-                gameQue.splice(queIndex, 1);
+                const {code:roomId,players, seasons:seasonsPerYear,seasonLength} = gameQue[queIndex];
+                const gameSettings = {seasonsPerYear,seasonLength};
+                liveGames.push(new Debellatio(roomId,players,gameSettings));
+                gameQue.splice(roomId, 1);
+                io.in(roomId).emit('gameStarted', 'initial game object',roomId);
             }
         });
 
