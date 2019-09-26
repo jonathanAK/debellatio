@@ -6,11 +6,12 @@ const app = express();
 //Globals
 const gameQue = [];
 const liveGames = [];
+const playerIndex = {};
 
 //setup Web Socket
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-require('./services/socket.service')(io,gameQue,liveGames);
+require('./services/socket.service')(io,gameQue,liveGames,playerIndex);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

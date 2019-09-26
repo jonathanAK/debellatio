@@ -2,7 +2,7 @@ const Debellatio = require("../debellatio/Debellatio");
 
 const {uniqueGameCode} = require('../misc/nonce.js');
 
-module.exports = (io,gameQue,liveGames) => {
+module.exports = (io,gameQue,liveGames,playerIndex) => {
     io.on('connection', function(socket){
         console.log(`a user connected, user ID:${socket.id}`);
         socket.on('newGame', msg =>{
@@ -20,6 +20,7 @@ module.exports = (io,gameQue,liveGames) => {
                         players:[{name:msg.name.substring(0,30),id:userID}]
                     };
                     gameQue.push(gameSetting);
+                    playerIndex[userID] = gameId;
                     socket.join(gameId);
 
                     io.in(gameId).emit('gameCreated', gameId);
@@ -53,7 +54,7 @@ module.exports = (io,gameQue,liveGames) => {
 
         socket.on('startGame',msg =>{
             const queIndex = gameQue.findIndex(item => item.players[0].id === socket.id);
-            if(queIndex!==-1){
+            if(queIndex!==-1 && gameQue[queIndex].players.length>1){
                 const {code:roomId,players, seasons:seasonsPerYear,seasonLength} = gameQue[queIndex];
                 const gameSettings = {seasonsPerYear,seasonLength};
                 liveGames.push(new Debellatio(roomId,players,gameSettings));

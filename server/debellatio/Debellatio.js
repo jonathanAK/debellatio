@@ -1,12 +1,12 @@
+const {TerritoryTypeEnum,TroopTypeEnum} = require('./Enums');
 const defaultTerritories  = require('./defaults/territories');
-const defaultTroops = require('./defaults/troops');
-const defaultArmies = require('./defaults/armies');
+const territoryHolders = JSON.parse(require('./defaults/territoryHolders'));
 
 module.exports = class Debellatio{
     constructor(roomId,playerList,gameSettings){
-        this.territories = JSON.parse(defaultTerritories);
-        this.troops = JSON.parse(defaultTroops);
-        this.armies = JSON.parse(defaultArmies);
+        this.troops = [];
+        this.armies=[];
+        this.populateTerritoriesAndTroops(playerList.length);
         this.season = 0;
         this.roomId = roomId;
         this.gameSettings = gameSettings;
@@ -17,7 +17,25 @@ module.exports = class Debellatio{
         }
     };
 
-    // populateTerritories(){
-    //     return Territories;
+    populateTerritoriesAndTroops(numOfPlayers){
+        this.territories = JSON.parse(defaultTerritories);
+        for(let i=0; i<this.territories.length;i++){
+            this.territories.army = territoryHolders[numOfPlayers][i];
+            if(this.territories[i].capital != null){
+                this.troops.push({
+                    "location":i,
+                    "type": (this.territories[i].type === TerritoryTypeEnum.Land?TroopTypeEnum.Platoon:TroopTypeEnum.Ship),
+                    "army":this.territories.army
+                });
+            }
+        }
+    }
+    // adjustBoardForLessPlayers(numOfPlayers){
+    //     switch (numOfPlayers) {
+    //         case
+    //     }
     // }
+
+
+
 };
