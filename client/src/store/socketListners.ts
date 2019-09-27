@@ -3,7 +3,7 @@ import {debellatioSetView} from "./views.reducer";
 import {ActiveViewEnum} from "../models/ActiveView";
 import {debellatioSetGameCode, debellatioSetPlayers} from "./misc.reducer";
 import {Dispatch} from "redux";
-import {debellatioUpdateBoard} from "./gameBoard.reducer";
+import {debellatioUpdateBoard,debellatioUpdatePlayerID} from "./gameBoard.reducer";
 
 
 const socketListners:(dispatch: Dispatch)=>Array<SocketListner> =(dispatch:Dispatch)=>{
@@ -29,10 +29,16 @@ const socketListners:(dispatch: Dispatch)=>Array<SocketListner> =(dispatch:Dispa
                 }
             },
             {
+                event:'playerId',
+                fn:(message:[object]) => {
+                    dispatch(debellatioUpdatePlayerID(message));
+                }
+            },
+            {
                 event:'gameStarted',
                 fn:(message:[object]) => {
                     dispatch(debellatioSetView (ActiveViewEnum.PLayPage));
-                    // dispatch(debellatioUpdateBoard (message));
+                    dispatch(debellatioUpdateBoard(message));
                 }
             },
             {

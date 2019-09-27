@@ -5,7 +5,7 @@ const app = express();
 
 //Globals
 const gameQue = [];
-const liveGames = [];
+const liveGames = {};
 
 //setup Web Socket
 const server = require('http').createServer(app);

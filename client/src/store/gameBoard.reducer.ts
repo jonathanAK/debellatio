@@ -1,6 +1,7 @@
 import {Action} from '../models/Action';
 
-const DEBELLATIO_UPDATE_BOARD = '[DEBELLATION] GAME_BOARD_UPDATE';
+const DEBELLATIO_UPDATE_BOARD = '[DEBELLATIO] GAME_BOARD_UPDATE';
+const DEBELLATIO_UPDATE_PLAYER_ID = '[DEBELLATIO] PLAYER_ID_UPDATE';
 
 // actions factories
 export const debellatioUpdateBoard = (payload: Object) => {
@@ -9,16 +10,27 @@ export const debellatioUpdateBoard = (payload: Object) => {
         payload
     }
 };
+export const debellatioUpdatePlayerID = (payload: Object) => {
+    return {
+        type: DEBELLATIO_UPDATE_PLAYER_ID,
+        payload
+    }
+};
 
 const storeInit = {
     countryID: -1,
-    empires: [],
+    armies: [],
     territories: [],
     troops:[]
 };
 
 const gameBoredReducer = (state:{} = storeInit, action: Action) => {
     switch (action.type) {
+        case DEBELLATIO_UPDATE_PLAYER_ID:
+            return{
+              ...state,
+              countryID:action.payload
+            };
         case DEBELLATIO_UPDATE_BOARD:
             return{
                 ...state,
