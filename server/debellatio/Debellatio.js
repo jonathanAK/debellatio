@@ -3,17 +3,16 @@ const defaultTerritories  = require('./defaults/territories');
 const territoryHolders = JSON.parse(require('./defaults/territoryHolders'));
 
 module.exports = class Debellatio{
-    constructor(roomId,playerList,gameSettings){
+    constructor(playerList,gameSettings){
         this.troops = [];
         this.armies=[];
         this.populateTerritoriesAndTroops(playerList.length);
         this.season = 0;
-        this.roomId = roomId;
         this.gameSettings = gameSettings;
         playerList.sort(() => Math.random() - 0.5);
         this.playerList = [...playerList];
         for (let i=0; i<playerList.length;i++){
-            this.armies[i].name = playerList[i].name;
+            this.armies.push({name :playerList[i].name});
         }
     };
 
