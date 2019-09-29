@@ -64,7 +64,8 @@ module.exports = (io,gameQue,liveGames) => {
                 io.in(roomId).emit('gameStarted', {
                     territories:liveGames.roomId.territories,
                     troops:liveGames.roomId.troops,
-                    armies:liveGames.roomId.armies
+                    armies:liveGames.roomId.armies,
+                    settings:{gameSettings}
                 });
             }
         });

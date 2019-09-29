@@ -19,9 +19,11 @@ export const debellatioUpdatePlayerID = (payload: Object) => {
 
 const storeInit = {
     countryID: -1,
+    season:0,
     armies: [],
     territories: [],
-    troops:[]
+    troops:[],
+    settings:{}
 };
 
 const gameBoredReducer = (state:{} = storeInit, action: Action) => {

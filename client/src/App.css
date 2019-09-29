@@ -1,13 +1,22 @@
 body {
   background: black;
+}
+
+#joinView{
+  width:100%;
+  height:100vh;
+  margin:0;
+  background: black;
   /*background-image: url("/resources/img/background-login.jpg");*/
   background-image: url("/img/background-login.jpg");
   background-position: top center;
   background-repeat: no-repeat;
+  background-size: cover;
   display: grid;
   align-content: center;
   justify-content: center;
 }
+
 
 main {
   display: grid;

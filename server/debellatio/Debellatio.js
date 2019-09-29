@@ -19,22 +19,23 @@ module.exports = class Debellatio{
     populateTerritoriesAndTroops(numOfPlayers){
         this.territories = JSON.parse(defaultTerritories);
         for(let i=0; i<this.territories.length;i++){
-            this.territories.army = territoryHolders[numOfPlayers][i];
+            this.territories[i].army = territoryHolders[numOfPlayers][i];
             if(this.territories[i].capital != null){
+                const troopType = (this.territories[i].type === TerritoryTypeEnum.Land?TroopTypeEnum.Platoon:TroopTypeEnum.Ship);
+                this.territories[i].troop = troopType;
                 this.troops.push({
                     "location":i,
-                    "type": (this.territories[i].type === TerritoryTypeEnum.Land?TroopTypeEnum.Platoon:TroopTypeEnum.Ship),
+                    "type":troopType,
                     "army":this.territories.army
                 });
             }
         }
-    }
-    // adjustBoardForLessPlayers(numOfPlayers){
-    //     switch (numOfPlayers) {
-    //         case
-    //     }
-    // }
+    };
 
-
+    updateTroopViewInTerritories(){
+        for(let i=0; i<this.troops.length;i++){
+            this.territories[this.troops[i].location].troop = this.troops[i].type;
+        }
+    };
 
 };
