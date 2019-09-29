@@ -3,6 +3,8 @@ import {debellatioSetView} from "../../store/views.reducer";
 import {ActiveViewEnum} from "../../models/ActiveView";
 import {connect} from "react-redux";
 import './QaBar.css';
+import {debellatioUpdateBoard, debellatioUpdatePlayerID} from "../../store/gameBoard.reducer";
+import {sampleGameObject} from "./sampleGameObject";
 
 const QaBar = ({goToCreateGame,goToPlayPage}) => {
     return (
@@ -20,6 +22,8 @@ const mapDispatchToProps = (dispatch) => ({
     },
     goToPlayPage: () => {
     dispatch(debellatioSetView (ActiveViewEnum.PLayPage));
+    dispatch(debellatioUpdatePlayerID(0));
+    dispatch(debellatioUpdateBoard(sampleGameObject));
 },
 });
 

@@ -1,0 +1,72 @@
+.GameMap{
+    display: grid;
+    grid-gap: 0px 0px;
+    width:80%;
+    margin:auto;
+    grid-template-areas:
+            ".  .  aa ab ac ad ae  .  ."
+            ".  af ag ah ai aj ak al  ."
+            "am an ao ap aq ar as at au"
+            "av aw ax ay az ba bb bc bd"
+            "be bf bg bh bi bj bk bl bm"
+            ".  bn bo bp bq br bs bt  ."
+            ".  .  bu bv bw bx by  .  .";
+}
+
+.singleTerritoryBox{
+    width:6vw;
+    height: 6vw;
+    border: 1px solid black;
+    display: grid;
+    grid-template-areas:
+            "n n"
+            "t c";
+}
+
+.singleTerritoryBox_name{
+    grid-area:n;
+}
+.singleTerritoryBox_troop{
+    grid-area:t;
+}
+.singleTerritoryBox_capital{
+    grid-area:c;
+}
+
+.singleTerritoryBox_capital > img{
+    width:30%;
+}
+
+.singleTerritoryBox_troop > img{
+    width:80%;
+}
+
+/*ArmyColors*/
+.armyNon{
+    background-color: aliceblue;
+}
+.armySea{
+    /*background-image: url("/resources/img/sea.jpg");*/
+    background-image: url("/img/sea.jpg");
+}
+.armyA{
+    background-color: mediumslateblue;
+}
+.armyB{
+    background-color: lightcoral;
+}
+.armyC{
+    background-color: darkslategrey;
+}
+.armyD{
+    background-color: yellow;
+}
+.armyE{
+    background-color: crimson;
+}
+.armyF{
+    background-color: greenyellow;
+}
+.armyG{
+    background-color: coral;
+}
