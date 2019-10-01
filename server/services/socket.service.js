@@ -59,7 +59,7 @@ module.exports = (io,gameQue,liveGames) => {
                 liveGames.roomId=new Debellatio(players,gameSettings);
                 gameQue.splice(roomId, 1);
                 for(let i=0; i<liveGames.roomId.playerList.length;i++){
-                    socket.broadcast.to(liveGames.roomId.playerList[i].id).emit('playerId', i+1);
+                    io.sockets.in(liveGames.roomId.playerList[i].id).emit('playerId', i+1);
                 }
                 io.in(roomId).emit('gameStarted', {
                     territories:liveGames.roomId.territories,
@@ -70,6 +70,8 @@ module.exports = (io,gameQue,liveGames) => {
             }
         });
 
-        socket.on('dispatchOrders',msg =>{});
+        socket.on('dispatchOrders',msg =>{
+            socket.emit('commandReceived');
+        });
     });
 };

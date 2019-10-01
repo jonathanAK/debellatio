@@ -712,26 +712,121 @@ export const sampleGameObject = {
             army: 3
         }
     ],
-    troops: [{location: 0, type: 0},
-        {location: 1, type: 0},
-        {location: 2, type: 0},
-        {location: 3, type: 0},
-        {location: 4, type: 0},
-        {location: 5, type: 0},
-        {location: 6, type: 0},
-        {location: 7, type: 0},
-        {location: 8, type: 0},
-        {location: 15, type: 0},
-        {location: 16, type: 0},
-        {location: 20, type: 0},
-        {location: 25, type: 0},
-        {location: 29, type: 0},
-        {location: 35, type: 0},
-        {location: 36, type: 0},
-        {location: 37, type: 0},
-        {location: 38, type: 0},
-        {location: 44, type: 0},
-        {location: 49, type: 0},
-        {location: 50, type: 0}
+    troops: [
+        {
+            location: 0,
+            type: 0,
+            army: 1
+        },
+        {
+            location: 2,
+            type: 0,
+            army: 2
+        },
+        {
+            location: 4,
+            type: 0,
+            army: 3
+        },
+        {
+            location: 5,
+            type: 0,
+            army: 1
+        },
+        {
+            location: 7,
+            type: 0,
+            army: 2
+        },
+        {
+            location: 11,
+            type: 1,
+            army: 3
+        },
+        {
+            location: 12,
+            type: 1,
+            army: 1
+        },
+        {
+            location: 14,
+            type: 1,
+            army: 1
+        },
+        {
+            location: 16,
+            type: 0,
+            army: 2
+        },
+        {
+            location: 20,
+            type: 0,
+            army: 3
+        },
+        {
+            location: 24,
+            type: 1,
+            army: 2
+        },
+        {
+            location: 25,
+            type: 0,
+            army: 2
+        },
+        {
+            location: 27,
+            type: 1,
+            army: 3
+        },
+        {
+            location: 28,
+            type: 1,
+            army: 3
+        },
+        {
+            location: 30,
+            type: 1,
+            army: 1
+        },
+        {
+            location: 35,
+            type: 0,
+            army: 2
+        },
+        {
+            location: 38,
+            type: 0,
+            army: 3
+        },
+        {
+            location: 39,
+            type: 1,
+            army: 1
+        },
+        {
+            location: 42,
+            type: 1,
+            army: 2
+        },
+        {
+            location: 45,
+            type: 0,
+            army: 3
+        },
+        {
+            location: 46,
+            type: 1,
+            army: 1
+        },
+        {
+            location: 48,
+            type: 1,
+            army: 2
+        },
+        {
+            location: 50,
+            type: 0,
+            army: 3
+        }
     ]
 };

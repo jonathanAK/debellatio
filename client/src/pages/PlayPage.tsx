@@ -9,8 +9,7 @@ const PlayPage: React.FC<IProps> = () => {
     return (
         <main id="playView">
             <GameMap/>
-            {/*<CommandSheet troops={} territory={} army={} commandSubmit={}/>*/}
-            <h1>I am the command sheet</h1>
+            <CommandSheet/>
         </main>
     );
 };

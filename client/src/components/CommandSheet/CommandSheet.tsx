@@ -1,31 +1,71 @@
 import React from 'react';
 import {Fab, Grid, List, ListItem} from '@material-ui/core';
 import CommandSheetRow from "./CommandSheetRow";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
+import {sendSocketMessage} from "../../store/socketMiddleware";
 
 interface IProps {
+    stage:string
     troops:any
-    territory:any
+    territories:any
     army:String
-    commandSubmit:Function
-
+    submitCommands:(payload: any) => void
+    season:number
 }
 
-const CommandSheet: React.FC<IProps> = ({troops, territory,army,commandSubmit}) => {
-    return (
-        <Grid container spacing={3}>
-            <List className={"commandSheetList"}>
+const CommandSheet: React.FC<IProps> = ({troops, territories,army,stage,submitCommands,season}) => {
+    const commandList:any = {commands:{},season};
+    const dispatchOrders = ()=>{
+        submitCommands(commandList);
+    };
 
-            {
-                troops.map((troop:any)=>(
-                    (troop.army === army) && <ListItem><CommandSheetRow troop={troop} neighbors={territory[troop.location].borders}/></ListItem>
-                ))
-            }
-            </List>
-            <Fab variant="extended" aria-label="delete">
-                Send Orders
-            </Fab>
-        </Grid>
+    const view = getCommandSheetView();
+    function getCommandSheetView(): JSX.Element | undefined {
+        switch (stage) {
+            case 'waiting':
+                return(<h3>Waiting for other players</h3>);
+            case 'main':
+                return(
+                    <div>
+                        <List className={"commandSheetList"}>
+                        {
+                            troops.map((troop:any)=>(
+                                (troop.army === army) && <ListItem><CommandSheetRow key={troop} troop={troop} neighbors={territories[troop.location].borders} commandList ={commandList.commands}/></ListItem>
+                            ))
+                        }
+                        </List>
+                        <button onClick={dispatchOrders}>
+                            Send Orders
+                        </button>
+                    </div>
+                );
+        }
+        return;
+    }
+
+    return (
+        <div>
+            {view}
+        </div>
+
     )
 };
 
-export default CommandSheet;
+const mapStateToProps = (state: any) => {
+    return {
+        stage: state.board.stage,
+        territories: state.board.territories,
+        troops: state.board.troops,
+        army: state.board.countryID,
+        season:state.board.season
+    }
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    submitCommands: (payload:object) => {
+        dispatch(sendSocketMessage('dispatchOrders',payload));
+    }
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(CommandSheet);

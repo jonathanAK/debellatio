@@ -26,7 +26,7 @@ module.exports = class Debellatio{
                 this.troops.push({
                     "location":i,
                     "type":troopType,
-                    "army":this.territories.army
+                    "army":this.territories[i].army
                 });
             }
         }

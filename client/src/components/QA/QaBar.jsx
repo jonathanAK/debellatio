@@ -22,8 +22,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     goToPlayPage: () => {
     dispatch(debellatioSetView (ActiveViewEnum.PLayPage));
-    dispatch(debellatioUpdatePlayerID(0));
+    dispatch(debellatioUpdatePlayerID(1));
     dispatch(debellatioUpdateBoard(sampleGameObject));
+    dispatch(debellatioUpdateBoard({stage:'main'}));
 },
 });
 
