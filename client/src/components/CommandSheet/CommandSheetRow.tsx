@@ -4,18 +4,19 @@ import {connect} from "react-redux";
 import {TroopTypesEnum} from "../../models/troopTypes";
 
 interface IProps {
-    troop: any;
-    neighbors:any;
+    troopId:number
+    troop: any
+    neighbors:any
     commandList:any
     territories:any
 }
 
-const CommandSheetRow: React.FC<IProps> = ({troop,neighbors,commandList,territories}) => {
+const CommandSheetRow: React.FC<IProps> = ({troopId, troop,neighbors,commandList,territories}) => {
     const [order, setOrder] = useState("defend");
     const [target, setTarget] = useState(troop.location.toString());
     const [auxUnit, setAuxUnit] = useState("");
 
-    commandList[troop.location]={order,target,auxUnit};
+    commandList[troopId]={order,target,auxUnit};
     return (
         <Card>
             <img

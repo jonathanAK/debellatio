@@ -51,6 +51,7 @@ const socketListners:(dispatch: Dispatch)=>Array<SocketListner> =(dispatch:Dispa
                 event:'newSeason',
                 fn:(message:[object]) => {
                     dispatch(debellatioUpdateBoard(message));
+                    dispatch(debellatioUpdateBoard({stage:'main'}));
                 }
             },
             {

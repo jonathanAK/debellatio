@@ -2,7 +2,7 @@ body {
   background: black;
 }
 
-#joinView{
+#joinView, #newGameView{
   width:100%;
   height:100vh;
   margin:0;
@@ -14,7 +14,7 @@ body {
   background-size: cover;
   display: grid;
   align-content: center;
-  justify-content: center;
+  /*justify-content: center;*/
 }
 
 

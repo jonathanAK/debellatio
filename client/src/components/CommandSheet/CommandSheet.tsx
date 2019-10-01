@@ -30,8 +30,8 @@ const CommandSheet: React.FC<IProps> = ({troops, territories,army,stage,submitCo
                     <div>
                         <List className={"commandSheetList"}>
                         {
-                            troops.map((troop:any)=>(
-                                (troop.army === army) && <ListItem><CommandSheetRow key={troop} troop={troop} neighbors={territories[troop.location].borders} commandList ={commandList.commands}/></ListItem>
+                            troops.map((troop:any,troopId:number)=>(
+                                (troop.army === army) && <ListItem><CommandSheetRow key={troopId} troopId={troopId} troop={troop} neighbors={territories[troop.location].borders} commandList ={commandList.commands}/></ListItem>
                             ))
                         }
                         </List>
