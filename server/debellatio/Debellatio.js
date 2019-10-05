@@ -4,10 +4,10 @@ const territoryHolders = JSON.parse(require('./defaults/territoryHolders'));
 
 module.exports = class Debellatio{
     constructor(playerList,gameSettings){
-        this.troops = [];
         this.armies=[];
-        this.orders=new Array(22).fill(null);
-        this.populateTerritoriesAndTroops(playerList.length);
+        this.orders={};
+        this.attackTable={};
+        this.populateTerritories(playerList.length);
         this.season = 0;
         this.gameSettings = gameSettings;
         playerList.sort(() => Math.random() - 0.5);
@@ -17,20 +17,23 @@ module.exports = class Debellatio{
         }
     };
 
-    populateTerritoriesAndTroops(numOfPlayers){
+    populateTerritories(numOfPlayers){
         this.territories = JSON.parse(defaultTerritories);
         for(let i=0; i<this.territories.length;i++){
             this.territories[i].army = territoryHolders[numOfPlayers][i];
-            if(this.territories[i].capital != null){
-                const troopType = (this.territories[i].type === TerritoryTypeEnum.Land?TroopTypeEnum.Platoon:TroopTypeEnum.Ship);
-                this.territories[i].troop = troopType;
-                this.troops.push({
-                    "location":i,
-                    "type":troopType,
-                    "army":this.territories[i].army
-                });
+            if(this.territories[i].army > 0 && this.territories[i].capital != null){
+                this.territories[i].troop = (this.territories[i].type === TerritoryTypeEnum.Land?TroopTypeEnum.Platoon:TroopTypeEnum.Ship);
             }
         }
+    };
+
+    getGameData(initial = false){
+        const initialStats = (initial?{armies:this.armies,settings:this.gameSettings}:{});
+        return{
+            territories:this.territories,
+            season:this.season,
+            ...initialStats
+        };
     };
 
     dispatchOrders(msg){
@@ -38,12 +41,12 @@ module.exports = class Debellatio{
             if(msg.season === this.season){
                 const playerId = this.playerList.findIndex(item => item.id === msg.playerSocket)+1;
                 Object.keys(msg.commands).forEach((troop)=>{
-                    const currentTroop = this.troops[parseInt(troop)];
-                    const currentTarget = parseInt(msg.commands[troop].target);
-                    const currentTroopTerritory = this.territories[currentTroop.location];
+                    const troopPosition = parseInt(troop)
+                    const currentTroop = this.territories[troopPosition];
+                    const currentTarget = parseInt(msg.commands[troopPosition].target);
                     if (currentTroop.army === playerId){
-                        if (currentTarget === currentTroop.location || currentTroopTerritory.borders.includes(currentTarget)) {
-                            this.orders[parseInt(troop)] = msg.commands[troop];
+                        if (currentTarget === troopPosition || currentTroop.borders.includes(currentTarget)) {
+                            this.orders[troopPosition] = msg.commands[troopPosition];
                         }
                     }
                 });
@@ -51,41 +54,100 @@ module.exports = class Debellatio{
         }catch{
             console.log('received bad input');
         }
-    }
-
-    isSeasonOver(roomSocket,season=null){
-        if(season!== null){
-            if (season === this.season){
-                this.resolveSeason(roomSocket);
-            }
-        }else{
-            if(this.orders.findIndex((item, index) => item === null && this.troops[index].army !== 0) === -1){
-                this.resolveSeason(roomSocket);
-            }
-        }
-    }
-
-    resolveSeason(roomSocket){
-        this
-        //     .shiftAssistToDefence()
-        //     .convoyTroops()
-        //     .createAttackTable()
-        //     .cleanUp() // re3turn things to null add 1 to season.
-            .updateTroopViewInTerritories()
-            .emitToSocket(roomSocket);
-    }
-
-    updateTroopViewInTerritories(){
-        for(let i=0; i<this.troops.length;i++){
-            this.territories[this.troops[i].location].troop = this.troops[i].type;
-        }
-        return this;
     };
 
-    emitToSocket(roomSocket){
-        roomSocket.emit('newSeason', {
-            territories:this.territories,
-            troops:this.troops,
+    isSeasonOver(sendUserNewSeason,season=null){
+        if(season!== null){
+            if (season === this.season){
+                this.resolveSeason(sendUserNewSeason);
+            }
+        }else{
+            if(this.territories.findIndex((item, index) => item.troop !== null && this.orders[index] === undefined) === -1){
+                this.resolveSeason(sendUserNewSeason);
+            }
+        }
+    }
+
+    resolveSeason(sendUserNewSeason){
+        this
+            .shiftAssistToDefence()
+            .convoyTroops()
+            .createAttackTable()
+            .moveTroops()
+            .cleanUp()
+            .emitToSocket(sendUserNewSeason);
+    }
+
+    shiftAssistToDefence(){
+        Object.keys(this.orders).forEach((orderKey)=>{
+            const {order,target} = this.orders[orderKey];
+            if( order ==='attack' || order==='convoy'){
+                if(this.territories[target].troop !== null){
+                    if(!this.orders[target] || (this.orders[target].order !== 'attack' && this.orders[target].order !== 'getConvoyed')){
+                        this.orders[target] = {order:'defend', target};
+                    }
+                }
+            }
         });
+        return this;
+    }
+
+    convoyTroops(){
+        Object.keys(this.orders).forEach((orderKey)=>{
+            const {order,target} = this.orders[orderKey];
+            if( order ==='getConvoyed' && this.orders[target].order === 'convoy'){
+                    this.orders[orderKey] = {order:'attack', target:this.orders[target].target};
+            }
+        });
+        return this;
+    }
+
+    createAttackTable(){
+        Object.keys(this.orders).forEach((troop)=>{
+            const {order,target,aux} = this.orders[troop];
+            const whoIsAttacking = {'defend':target,'attack':troop,'assist':aux};
+            const force = whoIsAttacking[order];
+            if(!this.attackTable[target]){this.attackTable[target]={}}
+            if(!this.attackTable[target][force]){this.attackTable[target][force]=1}
+            else{this.attackTable[target][force]+=1}
+        });
+        return this;
+    }
+
+    moveTroops(){
+        const unitsToPlace = [];
+        Object.keys(this.attackTable).forEach((battle)=>{
+            let max = 0;
+            let strongest = battle;
+            let tie = false;
+            Object.keys(this.attackTable[battle]).map(troop=> {
+                if ( this.attackTable[battle][troop] > max){
+                    strongest = troop;
+                    max = this.attackTable[battle][troop];
+                    tie = false;
+                }else if (this.attackTable[battle][troop] === max){tie = true}
+            });
+            if (strongest !== battle && ! tie){
+                unitsToPlace.push({territory:battle,army:this.territories[strongest].army,troop:this.territories[strongest].troop});
+                this.territories[strongest].troop = null;
+            }
+        });
+        unitsToPlace.forEach(({territory,army,troop})=>{
+            this.territories[territory].army = army;
+            this.territories[territory].troop = troop;
+        });
+        return this;
+    }
+
+    cleanUp(){
+        this.attackTable={};
+        this.orders={};
+        this.season++;
+        return this;
+    }
+
+    emitToSocket(sendUserNewSeason){
+        sendUserNewSeason(this.getGameData());
+        setTimeout(()=>{this.isSeasonOver(sendUserNewSeason,this.season)},this.gameSettings.seasonLength * 60000);
     }
 };

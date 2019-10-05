@@ -32,8 +32,8 @@ const SingleTerritory: React.FC<IProps> = ({name, id,army,capital,troop}) => {
     return (
         <div className={classes} style={{gridArea: gridRow}}>
             <div className={'singleTerritoryBox_name'}>{name}</div>
-            <div className={'singleTerritoryBox_troop'}>{troopImg&&<img src={`img/${troopImg}.png`}/>}</div>
-            <div className={'singleTerritoryBox_capital'}>{capital&&<img src={'img/crane.png'}/>}</div>
+            <div className={'singleTerritoryBox_troop'}>{troopImg&&<img src={`img/${troopImg}.png`} alt={""}/>}</div>
+            <div className={'singleTerritoryBox_capital'}>{capital&&<img src={'img/crane.png'} alt={""}/>}</div>
         </div>
     )
 };

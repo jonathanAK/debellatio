@@ -22,7 +22,6 @@ const storeInit = {
     season:0,
     armies: [],
     territories: [],
-    troops:[],
     settings:{},
     stage:'waiting'
 };

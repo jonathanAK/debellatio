@@ -5,15 +5,13 @@ import {TroopTypesEnum} from "../../models/troopTypes";
 
 interface IProps {
     troopId:number
-    troop: any
-    neighbors:any
     commandList:any
     territories:any
 }
 
-const CommandSheetRow: React.FC<IProps> = ({troopId, troop,neighbors,commandList,territories}) => {
+const CommandSheetRow: React.FC<IProps> = ({troopId, commandList,territories}) => {
     const [order, setOrder] = useState("defend");
-    const [target, setTarget] = useState(troop.location.toString());
+    const [target, setTarget] = useState(troopId.toString());
     const [auxUnit, setAuxUnit] = useState("");
 
     commandList[troopId]={order,target,auxUnit};
@@ -21,23 +19,23 @@ const CommandSheetRow: React.FC<IProps> = ({troopId, troop,neighbors,commandList
         <Card>
             <img
                 className={'commandSheet-image'}
-                src={`${process.env.PUBLIC_URL}/img/${troop.type===TroopTypesEnum.tank?'tank':'ship'}.png`}
+                src={`${process.env.PUBLIC_URL}/img/${territories[troopId].troop === TroopTypesEnum.tank?'tank':'ship'}.png`}
                 alt="Tank"
             />
-            <Typography>{troop.location}</Typography>
+            <Typography>{troopId}</Typography>
 
             <select value={order} onChange={e => setOrder(e.target.value)}>
                 <option value={"defend"}>Defend</option>
                 <option  value={"attack"}>Attack</option>
                 <option  value={"assist"}>Assist</option>
-                {troop.type===TroopTypesEnum.ship && <option  value={"convoy"}>Convoy</option>}
-                {troop.type!==TroopTypesEnum.ship && <option  value={"getConvoyed"}>Get Convoyed</option>}
+                {territories[troopId].troop===TroopTypesEnum.ship && <option  value={"convoy"}>Convoy</option>}
+                {territories[troopId].troop!==TroopTypesEnum.ship && <option  value={"getConvoyed"}>Get Convoyed</option>}
             </select>
             <select value={target} onChange={e => setTarget(e.target.value)}>
-                <option value={troop.location}>{territories[troop.location].name}</option>
+                <option value={troopId}>{territories[troopId].name}</option>
                 {
-                    neighbors.map((neighbor: any) => (
-                    <option value={neighbor}>{neighbor}</option>
+                    territories[troopId].borders.map((border: any) => (
+                    <option value={border}>{border}</option>
                     ))
                 }
             </select>
