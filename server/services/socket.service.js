@@ -54,22 +54,33 @@ module.exports = (io,gameQue,liveGames) => {
         socket.on('startGame',() =>{
             const queIndex = gameQue.findIndex(item => item.players[0].id === socket.id);
             if(queIndex!==-1 && gameQue[queIndex].players.length>1){
-                const {code:roomId,players, seasons:seasonsPerYear,seasonLength} = gameQue[queIndex];
+                const {code:roomId,players, seasons:seasonsPerYear,seasonLength,firstSeason} = gameQue[queIndex];
                 const gameSettings = {seasonsPerYear,seasonLength};
-                liveGames.roomId=new Debellatio(players,gameSettings);
+                liveGames[roomId]=new Debellatio(players,gameSettings);
                 gameQue.splice(roomId, 1);
-                for(let i=0; i<liveGames.roomId.playerList.length;i++){
-                    socket.broadcast.to(liveGames.roomId.playerList[i].id).emit('playerId', i+1);
+                //set length of first season
+                setTimeout(()=>{liveGames[roomId].isSeasonOver(io.in(roomId),0)},firstSeason * 60000);
+                //emit player ID for each player
+                for(let i=0; i<liveGames[roomId].playerList.length;i++){
+                    io.sockets.in(liveGames[roomId].playerList[i].id).emit('playerId', i+1);
                 }
+                //emit initial game data to all users
                 io.in(roomId).emit('gameStarted', {
-                    territories:liveGames.roomId.territories,
-                    troops:liveGames.roomId.troops,
-                    armies:liveGames.roomId.armies,
+                    territories:liveGames[roomId].territories,
+                    troops:liveGames[roomId].troops,
+                    armies:liveGames[roomId].armies,
                     settings:{gameSettings}
                 });
             }
         });
 
-        socket.on('dispatchOrders',msg =>{});
+        socket.on('dispatchOrders',msg =>{
+            const roomId = Object.keys(socket.rooms).filter(item => item!==socket.id)[0];
+            if(roomId && roomId in liveGames){
+                liveGames[roomId].dispatchOrders({playerSocket : socket.id,...msg});
+                socket.emit('commandReceived');
+                liveGames[roomId].isSeasonOver(io.in(roomId));
+            }
+        });
     });
 };

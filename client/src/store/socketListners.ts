@@ -37,14 +37,21 @@ const socketListners:(dispatch: Dispatch)=>Array<SocketListner> =(dispatch:Dispa
             {
                 event:'gameStarted',
                 fn:(message:[object]) => {
+                    dispatch(debellatioUpdateBoard({...message,stage:'main'}));
                     dispatch(debellatioSetView (ActiveViewEnum.PLayPage));
-                    dispatch(debellatioUpdateBoard(message));
+                }
+            },
+            {
+                event:'commandReceived',
+                fn:(message:[object]) => {
+                    dispatch(debellatioUpdateBoard({stage:'waiting'}));
                 }
             },
             {
                 event:'newSeason',
                 fn:(message:[object]) => {
                     dispatch(debellatioUpdateBoard(message));
+                    dispatch(debellatioUpdateBoard({stage:'main'}));
                 }
             },
             {

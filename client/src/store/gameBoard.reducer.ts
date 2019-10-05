@@ -23,7 +23,8 @@ const storeInit = {
     armies: [],
     territories: [],
     troops:[],
-    settings:{}
+    settings:{},
+    stage:'waiting'
 };
 
 const gameBoredReducer = (state:{} = storeInit, action: Action) => {
