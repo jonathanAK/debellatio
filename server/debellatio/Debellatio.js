@@ -90,7 +90,7 @@ module.exports = class Debellatio{
         return true;
     }
 
-    isSeasonOver(sendUserNewSeason,gameOver,season=null){
+    isSeasonOver({sendUserNewSeason,gameOver},season=null){
         if(season!== null){
             if (season === this.season){
                 this.resolveSeason(sendUserNewSeason,gameOver);
@@ -213,7 +213,7 @@ module.exports = class Debellatio{
             gameOver(winner);
         }else{
             sendUserNewSeason(this.getGameData());
-            setTimeout(()=>{this.isSeasonOver(sendUserNewSeason,this.season)},this.gameSettings.seasonLength * 60000);
+            setTimeout(()=>{this.isSeasonOver({sendUserNewSeason,gameOver},this.season)},this.gameSettings.seasonLength * 60000);
         }
     }
 };
