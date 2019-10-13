@@ -43,11 +43,11 @@ module.exports = (io,gameQue,liveGames) => {
             const queIndex = gameQue.findIndex(item => item.players[0].id === socket.id);
             if(queIndex!==-1 && gameQue[queIndex].players.length>1){
                 const {code:roomId,players, seasons:seasonsPerYear,seasonLength,firstSeason} = gameQue[queIndex];
-                const gameSettings = {seasonsPerYear,seasonLength};
+                const gameSettings = {seasonsPerYear,seasonLength, firstSeason};
                 liveGames[roomId]=new Debellatio(players,gameSettings);
                 gameQue.splice(roomId, 1);
                 //set length of first season
-                setTimeout(()=>{liveGames[roomId].isSeasonOver(data=>io.in(roomId).emit('newSeason',data),0)},firstSeason * 60000);
+                setTimeout(()=>{liveGames[roomId].isSeasonOver(data=>io.in(roomId).emit('newSeason',data),winner=>io.in(roomId).emit('gameOver',winner),0)},firstSeason * 60000);
                 //emit player ID for each player
                 for(let i=0; i<liveGames[roomId].playerList.length;i++){
                     io.sockets.in(liveGames[roomId].playerList[i].id).emit('playerId', i+1);
@@ -59,10 +59,11 @@ module.exports = (io,gameQue,liveGames) => {
 
         socket.on('dispatchOrders',msg =>{
             const roomId = Object.keys(socket.rooms).filter(item => item!==socket.id)[0];
+            const emitToUser = {sendUserNewSeason: data=>{io.in(roomId).emit('newSeason',data)}, gameOver: winner=>{io.in(roomId).emit('gameOver',winner)}};
             if(roomId && roomId in liveGames){
                 liveGames[roomId].dispatchOrders({playerSocket : socket.id,...msg});
                 socket.emit('commandReceived');
-                liveGames[roomId].isSeasonOver(data=>io.in(roomId).emit('newSeason',data));
+                liveGames[roomId].isSeasonOver(data=>io.in(roomId).emit('newSeason',data),winner=>io.in(roomId).emit('gameOver',winner));
             }
         });
     });

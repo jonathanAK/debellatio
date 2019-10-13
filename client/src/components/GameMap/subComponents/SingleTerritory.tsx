@@ -1,4 +1,5 @@
 import React from 'react';
+import {TerritoryTypeEnum} from "../../../models/territoryTypes";
 
 interface IProps {
     name:string|number
@@ -6,9 +7,10 @@ interface IProps {
     army:number
     capital:string|null
     troop:number|null
+    type:TerritoryTypeEnum
 }
 
-const SingleTerritory: React.FC<IProps> = ({name, id,army,capital,troop}) => {
+const SingleTerritory: React.FC<IProps> = ({name, id,army,capital,troop,type}) => {
     const gridRow=(id<26?'a'+(id+10).toString(36):'b'+(id-16).toString(36));//mark to location in the grid to display the block
     //convert arrays to values
     const troopType = [
@@ -25,7 +27,7 @@ const SingleTerritory: React.FC<IProps> = ({name, id,army,capital,troop}) => {
         'armyF',
         'armyG'
     ];
-    const armyId = (armyClasses[army]?armyClasses[army]:'armySea');
+    const armyId = (type === TerritoryTypeEnum.Sea ? 'armySea':armyClasses[army]);
 
     const classes = 'singleTerritoryBox '+ armyId;
     const troopImg = (troop!==null?troopType[troop]:null);
