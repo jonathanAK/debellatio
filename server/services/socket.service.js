@@ -6,7 +6,7 @@ module.exports = (io,gameQue,liveGames) => {
         console.log(`a user connected, user ID:${socket.id}`);
         socket.on('newGame', msg =>{
             try{
-                if(typeof(msg.name)==="string" && msg.name!==""){
+                if((typeof(msg.name)==="string" && msg.name!=="") || msg.GM){
                     const gameSetting = initGameSettings(msg,socket.id);
                     gameQue.push(gameSetting);
                     socket.join(gameSetting.code);
@@ -40,7 +40,7 @@ module.exports = (io,gameQue,liveGames) => {
         });
 
         socket.on('startGame',() =>{
-            const queIndex = gameQue.findIndex(item => item.players[0].id === socket.id);
+            const queIndex = gameQue.findIndex(item => item.gameOwner === socket.id);
             if(queIndex!==-1 && gameQue[queIndex].players.length>1){
                 const {code:roomId,players, seasons:seasonsPerYear,seasonLength,firstSeason} = gameQue[queIndex];
                 const emitToUser = {sendUserNewSeason: data=>{io.in(roomId).emit('newSeason',data)}, gameOver: winner=>{io.in(roomId).emit('gameOver',winner)}};
