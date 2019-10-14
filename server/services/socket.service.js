@@ -6,7 +6,7 @@ module.exports = (io,gameQue,liveGames) => {
         console.log(`a user connected, user ID:${socket.id}`);
         socket.on('newGame', msg =>{
             try{
-                if(typeof(msg.name)==="string" && msg.name!==""){
+                if((typeof(msg.name)==="string" && msg.name!=="") || msg.GM){
                     const gameSetting = initGameSettings(msg,socket.id);
                     gameQue.push(gameSetting);
                     socket.join(gameSetting.code);
