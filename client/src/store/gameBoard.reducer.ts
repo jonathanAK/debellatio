@@ -2,6 +2,8 @@ import {Action} from '../models/Action';
 
 const DEBELLATIO_UPDATE_BOARD = '[DEBELLATIO] GAME_BOARD_UPDATE';
 const DEBELLATIO_UPDATE_PLAYER_ID = '[DEBELLATIO] PLAYER_ID_UPDATE';
+const DEBELLATIO_RESET_TIME = '[DEBELLATIO] RESET_TIME';
+const DEBELLATIO_TIME_TIK = '[DEBELLATIO] TIME_TIK';
 
 // actions factories
 export const debellatioUpdateBoard = (payload: Object) => {
@@ -17,17 +19,30 @@ export const debellatioUpdatePlayerID = (payload: Object) => {
     }
 };
 
+export const debellatioResetTime = () => {
+    return {
+        type: DEBELLATIO_RESET_TIME
+    }
+};
+
+export const debellatioTimeTik = () => {
+    return {
+        type: DEBELLATIO_TIME_TIK,
+    }
+};
+
 const storeInit = {
     countryID: -1,
     season:0,
     armies: [],
     territories: [],
-    troops:[],
     settings:{},
-    stage:'waiting'
+    stage:'waiting',
+    timeLeft:0,
+    winner:0
 };
 
-const gameBoredReducer = (state:{} = storeInit, action: Action) => {
+const gameBoredReducer = (state:any = storeInit, action: Action) => {
     switch (action.type) {
         case DEBELLATIO_UPDATE_PLAYER_ID:
             return{
@@ -38,6 +53,16 @@ const gameBoredReducer = (state:{} = storeInit, action: Action) => {
             return{
                 ...state,
                 ...action.payload
+            };
+        case DEBELLATIO_RESET_TIME:
+            return{
+                ...state,
+                timeLeft : state.settings.seasonLength*60-5
+            };
+        case DEBELLATIO_TIME_TIK:
+            return{
+                ...state,
+                timeLeft:state.timeLeft -1
             };
     }
     return state;

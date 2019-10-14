@@ -2,4 +2,4 @@ export interface SocketListner{
     event: string;
     fn:Function;
 }
-export default SocketListner;
+export default SocketListner
