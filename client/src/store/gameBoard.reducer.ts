@@ -3,6 +3,7 @@ import {Action} from '../models/Action';
 const DEBELLATIO_UPDATE_BOARD = '[DEBELLATIO] GAME_BOARD_UPDATE';
 const DEBELLATIO_UPDATE_PLAYER_ID = '[DEBELLATIO] PLAYER_ID_UPDATE';
 const DEBELLATIO_RESET_TIME = '[DEBELLATIO] RESET_TIME';
+const DEBELLATIO_SET_SPROUT_TIMER = '[DEBELLATIO] SET_SPROUT_TIME';
 const DEBELLATIO_TIME_TIK = '[DEBELLATIO] TIME_TIK';
 
 // actions factories
@@ -22,6 +23,12 @@ export const debellatioUpdatePlayerID = (payload: Object) => {
 export const debellatioResetTime = () => {
     return {
         type: DEBELLATIO_RESET_TIME
+    }
+};
+
+export const debellatioSetSproutTimer = () => {
+    return {
+        type: DEBELLATIO_SET_SPROUT_TIMER
     }
 };
 
@@ -58,6 +65,11 @@ const gameBoredReducer = (state:any = storeInit, action: Action) => {
             return{
                 ...state,
                 timeLeft : state.settings.seasonLength*60-5
+            };
+        case DEBELLATIO_SET_SPROUT_TIMER:
+            return{
+                ...state,
+                timeLeft : 115
             };
         case DEBELLATIO_TIME_TIK:
             return{

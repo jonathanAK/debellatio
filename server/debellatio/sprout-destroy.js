@@ -26,7 +26,8 @@ const resolveSproutSeason = (context,sendToPlayers) => {
 const sproutDestroyOrders = (context) => {
     Object.keys(context.orders).forEach((troop) => {
         try {
-            const army = context.territories[troop].army;
+            console.log('a1');
+            const army = context.territories[troop].army -1;
             const order = context.orders[troop];
             if (order === 'destroy' && context.armies[army].balance < 0) {
                 context.territories[troop].troop = null;
