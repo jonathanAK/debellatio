@@ -43,12 +43,12 @@ module.exports = (io,gameQue,liveGames) => {
             const queIndex = gameQue.findIndex(item => item.gameOwner === socket.id);
             if(queIndex!==-1 && gameQue[queIndex].players.length>1){
                 const {code:roomId,players, seasons:seasonsPerYear,seasonLength,firstSeason} = gameQue[queIndex];
-                const emitToUser = {sendUserNewSeason: data=>{io.in(roomId).emit('newSeason',data)}, gameOver: winner=>{io.in(roomId).emit('gameOver',winner)}};
+                const sendToPlayers = (label,msg)=>{io.in(roomId).emit(label,msg)};
                 const gameSettings = {seasonsPerYear,seasonLength, firstSeason};
                 liveGames[roomId]=new Debellatio(players,gameSettings);
                 gameQue.splice(roomId, 1);
                 //set length of first season
-                setTimeout(()=>{liveGames[roomId].isSeasonOver(emitToUser,0)},firstSeason * 60000);
+                setTimeout(()=>{liveGames[roomId].isSeasonOver(sendToPlayers,0)},firstSeason * 60000);
                 //emit player ID for each player
                 for(let i=0; i<liveGames[roomId].playerList.length;i++){
                     io.sockets.in(liveGames[roomId].playerList[i].id).emit('playerId', i+1);
@@ -60,11 +60,21 @@ module.exports = (io,gameQue,liveGames) => {
 
         socket.on('dispatchOrders',msg =>{
             const roomId = Object.keys(socket.rooms).filter(item => item!==socket.id)[0];
-            const emitToUser = {sendUserNewSeason: data=>{io.in(roomId).emit('newSeason',data)}, gameOver: winner=>{io.in(roomId).emit('gameOver',winner)}};
+            const sendToPlayers = (label,msg)=>{io.in(roomId).emit(label,msg)};
             if(roomId && roomId in liveGames){
                 liveGames[roomId].dispatchOrders({playerSocket : socket.id,...msg});
                 socket.emit('commandReceived');
-                liveGames[roomId].isSeasonOver(emitToUser);
+                liveGames[roomId].isSeasonOver(sendToPlayers);
+            }
+        });
+
+        socket.on('sproutOrders',msg =>{
+            const roomId = Object.keys(socket.rooms).filter(item => item!==socket.id)[0];
+            const sendToPlayers = (label,msg)=>{io.in(roomId).emit(label,msg)};
+            if(roomId && roomId in liveGames){
+                liveGames[roomId].dispatchSprout({playerSocket : socket.id,...msg});
+                socket.emit('commandReceived');
+                liveGames[roomId].isSproutOver(sendToPlayers);
             }
         });
     });
