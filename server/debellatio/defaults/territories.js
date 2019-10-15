@@ -168,7 +168,7 @@ const territories =[
         "name":'20',
         "capital": "City",
         "type":TerritoryTypeEnum.Land,
-        "borders":[19,22],
+        "borders":[19,22,29],
         "troop": null
     },
     {

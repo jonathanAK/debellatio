@@ -9,7 +9,6 @@ const phaseToSeason = (phase:number,seasonsPerYear:number)=>{
     const year =1900 + Math.floor(phase/seasonsPerYear);
     const seasons = (seasonsPerYear === 2 ? ['Fall','Spring'] : ['Fall','Winter','Spring','Summer']);
     const season = seasons[phase % seasonsPerYear];
-    console.log(phase,seasonsPerYear);
     return( `${season}  ${year}` );
 };
 export {timeToSec,phaseToSeason};

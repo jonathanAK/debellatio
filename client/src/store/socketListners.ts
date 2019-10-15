@@ -7,7 +7,8 @@ import {
     debellatioResetTime,
     debellatioTimeTik,
     debellatioUpdateBoard,
-    debellatioUpdatePlayerID
+    debellatioUpdatePlayerID,
+    debellatioSetSproutTimer
 } from "./gameBoard.reducer";
 
 
@@ -49,7 +50,7 @@ const socketListners:(dispatch: Dispatch)=>Array<SocketListner> =(dispatch:Dispa
             },
             {
                 event:'commandReceived',
-                fn:(message:[object]) => {
+                fn:() => {
                     dispatch(debellatioUpdateBoard({stage:'waiting'}));
                 }
             },
@@ -59,6 +60,14 @@ const socketListners:(dispatch: Dispatch)=>Array<SocketListner> =(dispatch:Dispa
                     dispatch(debellatioUpdateBoard(message));
                     dispatch(debellatioResetTime());
                     dispatch(debellatioUpdateBoard({stage:'main'}));
+                }
+            },
+            {
+                event:'sproutPhase',
+                fn:(message:[object]) => {
+                    dispatch(debellatioUpdateBoard(message));
+                    dispatch(debellatioSetSproutTimer());
+                    dispatch(debellatioUpdateBoard({stage:'sprout'}));
                 }
             },
             {
