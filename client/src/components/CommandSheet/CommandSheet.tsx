@@ -61,10 +61,12 @@ const CommandSheet: React.FC<IProps> = ({territories, army, stage, submitCommand
                         <List className={"sproutCommandList"}>
                             {buildNew ?(
                                 territories.map((territory:any,territoryId:number)=>(
-                                    (territory.army === army && territory.troop===null && territory.capital !== null) && <ListItem><SproutTroopRow key={territoryId} troopId={territoryId} commandList ={commandList} allowedActions={allowedActions}/></ListItem>
+                                    (territory.army === army && territory.troop===null && territory.capital !== null) && <ListItem><SproutTroopRow key={territoryId} troopId={territoryId} commandList ={commandList} allowedActions={allowedActions} sprout={true}/></ListItem>
                                 ))
                             ):(
-                                <h2>mismis</h2>
+                                territories.map((territory:any,territoryId:number)=>(
+                                    (territory.army === army && territory.troop!==null) && <ListItem><SproutTroopRow key={territoryId} troopId={territoryId} commandList ={commandList} allowedActions={allowedActions}/></ListItem>
+                                ))
                             )}
                         </List>
                         <button onClick={dispatchSprout}>

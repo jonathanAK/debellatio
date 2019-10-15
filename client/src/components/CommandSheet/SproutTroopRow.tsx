@@ -8,16 +8,18 @@ interface IProps {
     commandList:any
     territories:any
     allowedActions:number
+    sprout?:boolean
 }
 
-const SproutTroopRow: React.FC<IProps> = ({troopId, commandList,territories,allowedActions}) => {
+const SproutTroopRow: React.FC<IProps> = ({troopId, commandList,territories,allowedActions,sprout=false}) => {
+    const actionParam = (sprout?'sprout':'destroy');
     const [order, setOrder] = useState(false);
 
     const handleOrderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if(event.target.checked && commandList.commandCount<allowedActions){
             setOrder(true);
             commandList.commandCount++;
-            commandList.commands[troopId]='sprout';
+            commandList.commands[troopId]=actionParam;
         }else if(!event.target.checked){
             setOrder(false);
             commandList.commandCount--;
