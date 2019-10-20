@@ -21,6 +21,10 @@ const JoinPage: React.FC<IProps> = ({goToCreateGame,joinGame}) => {
         joinGame({name, id:gamePin});
     };
 
+    //check if in the middle of an existing game
+    if (localStorage.getItem('socketId')) {
+        console.log(localStorage.getItem('socketId'));
+    }
 
     return (
         <main id="joinView">

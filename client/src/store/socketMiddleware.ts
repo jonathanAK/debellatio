@@ -18,6 +18,11 @@ const socketMiddleware:Middleware = ({dispatch}: MiddlewareAPI)=>{
     const  socket = openSocket('http://localhost:4000'); //for dev use change to bellow when done
     // const  socket = openSocket(process.env.PUBLIC_URL);
 
+    //persist socket to localstorage
+    socket.on('gameStarted', () => {
+        localStorage.setItem('socketId', socket.id);
+    });
+
     //register socket listeners
     socketListners(dispatch).forEach(socketListner=>{
         socket.on(socketListner.event, socketListner.fn);
