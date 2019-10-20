@@ -35,7 +35,7 @@
     width: 93.34%;
     height: 3.125rem;
     background-color: rgb(51, 51, 51);
-    text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
+    text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 0;
     color: rgb(255, 255, 255);
     font-weight: 700;
     font-size: 20px;
@@ -48,14 +48,14 @@
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     border-radius: 0.125rem;
     text-decoration: none;
-    outline: 0px;
+    outline: 0;
     cursor: pointer;
 }
 
 .CreateGame_settingForm{
     display: grid;
     justify-items: center;
-    grid-gap: 0px 40px;
+    grid-gap: 0 40px;
     grid-template-areas:
         "s s"
         "b t"
@@ -89,7 +89,7 @@
         padding-top:20px;
     }
     .CreateGame_settingForm{
-        grid-gap: 0px 100px;
+        grid-gap: 0 100px;
         grid-template-areas:
                 "s t"
                 "s b"

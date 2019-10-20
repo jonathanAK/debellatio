@@ -19,7 +19,7 @@ const WaitingForPlayersPage: React.FC<IProps> = ({joinCode,players,startGame}) =
             <div className={'Waiting_playersBox'}>
             {
                 players.map((player:any)=>(
-                    <h2 className={'Waiting_player'}>{player.name}</h2>
+                    <h2 key={player.id} className={'Waiting_player'}>{player.name}</h2>
                 ))
             }
             </div>

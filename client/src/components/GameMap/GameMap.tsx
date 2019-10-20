@@ -10,6 +10,7 @@ const GameMap: React.FC<IProps> = ({territories}) => {
     return (
         <div className={'GameMap'}>
             {territories.map((territory)=>(<SingleTerritory
+                key={territory.id}
                 name={territory.name}
                 id={territory.id}
                 army={territory.army}

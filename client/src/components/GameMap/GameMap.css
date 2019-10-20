@@ -1,6 +1,6 @@
 .GameMap{
     display: grid;
-    grid-gap: 0px 0px;
+    grid-gap: 0 0;
     width:81%;
     margin:auto;
     grid-template-areas:
