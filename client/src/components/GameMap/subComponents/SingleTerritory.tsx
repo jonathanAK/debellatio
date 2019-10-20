@@ -1,5 +1,6 @@
 import React from 'react';
 import {TerritoryTypeEnum} from "../../../models/territoryTypes";
+import './SingleTerritory.css';
 
 interface IProps {
     name:string|number
@@ -28,14 +29,14 @@ const SingleTerritory: React.FC<IProps> = ({name, id,army,capital,troop,type}) =
         'armyG'
     ];
     const armyId = (type === TerritoryTypeEnum.Sea ? 'armySea':armyClasses[army]);
-
-    const classes = 'singleTerritoryBox '+ armyId;
+    const capitals = {'City':'SingleTerritory_capital-city','Port':'SingleTerritory_capital-port'};
+    // @ts-ignore
+    const classes = 'singleTerritoryBox '+ armyId + (capital ? ' ' + capitals[capital] : '');
     const troopImg = (troop!==null?troopType[troop]:null);
     return (
         <div className={classes} style={{gridArea: gridRow}}>
             <div className={'singleTerritoryBox_name'}>{name}</div>
             <div className={'singleTerritoryBox_troop'}>{troopImg&&<img src={`img/${troopImg}.png`} alt={""}/>}</div>
-            <div className={'singleTerritoryBox_capital'}>{capital&&<img src={'img/crane.png'} alt={""}/>}</div>
         </div>
     )
 };

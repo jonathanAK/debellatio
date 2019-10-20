@@ -1,0 +1,53 @@
+.CommandSheet{
+    display:grid;
+    align-items: center;
+}
+
+.CommandSheet_commandList, .CommandSheet_sproutList{
+    margin: 10px;
+    display: grid;
+    grid-gap: 20px;
+}
+
+.CommandSheet_commandList > div, .CommandSheet_sproutList > div{
+    margin:auto;
+    background-color: gainsboro;
+}
+
+.CommandSheet_submit{
+    min-width: 6.25rem;
+    max-width: 18.75rem;
+    width: 93.34%;
+    height: 3.125rem;
+    background-color: rgb(51, 51, 51);
+    text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    font-size: 20px;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 10px auto;
+    padding: 0.25rem 0.875rem;
+    border-width: 0.0625rem;
+    border-style: solid;
+    border-image: initial;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    text-decoration: none;
+    outline: 0px;
+    cursor: pointer;
+}
+
+@media (min-width : 800px) {
+    .CommandSheet_commandList{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-gap: 20px;
+        justify-content: center;
+    }
+    .CommandSheet_sproutList{
+        display: grid;
+        grid-template-columns: repeat(5,auto);
+        grid-gap: 20px;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,34 @@
+.TopBar{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    height: 40px;
+    justify-content: center;
+    color:white;
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 100;
+    margin-bottom: 10px;
+ }
+
+.TopBar > div{
+    margin: auto;
+    display:grid;
+}
+
+.TopBar.player-1{border-bottom: 3px dashed white;}
+.TopBar.player1{background-color: mediumslateblue;}
+.TopBar.player2{background-color: lightcoral;}
+.TopBar.player3{background-color: darkslategrey;}
+.TopBar.player4{background-color: yellow;}
+.TopBar.player5{background-color: crimson;}
+.TopBar.player6{background-color: greenyellow;}
+.TopBar.player7{background-color: coral;}
+
+@media (min-width : 800px) {
+    .TopBar{
+        height: 65px;
+        font-size: 20px;
+    }
+    .TopBar > div{
+        grid-template-columns: repeat(2,1fr);
+    }
+}

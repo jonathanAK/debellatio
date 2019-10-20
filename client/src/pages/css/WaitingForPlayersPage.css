@@ -1,0 +1,52 @@
+#waitingView{
+    padding-top: 6vh;
+    align-content: start;
+    grid-gap: 10px;
+    text-align: center;
+}
+
+.Waiting_startButton{
+    display: inline-block;
+    min-width: 6.25rem;
+    max-width: 18.75rem;
+    width: 93.34%;
+    height: 3.125rem;
+    background-color: rgb(51, 51, 51);
+    text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    font-size: 20px;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: auto;
+    padding: 0.25rem 0.875rem;
+    border-width: 0.0625rem;
+    border-style: solid;
+    border-image: initial;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-radius: 0.125rem;
+    text-decoration: none;
+    outline: 0px;
+    cursor: pointer;
+}
+
+@media (min-width : 800px) {
+    #waitingView{
+        align-content: center;
+        grid-gap: 0px;
+    }
+
+    .Waiting_playersBox{
+        display:grid;
+        grid-template-columns: repeat(12, 1fr);
+        align-content: center;
+        justify-content: center;
+    }
+    .Waiting_player{
+        grid-column: span 4;
+    }
+    .Waiting_player:nth-child(7) {
+        grid-column: 5 / span 4;
+    }
+}
+
+

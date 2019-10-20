@@ -26,8 +26,8 @@ app.set('view engine', 'ejs');
 //set up Views
 
 
-//app.use('/resources',express.static('public'));
-app.use('/',express.static('public'));
+app.use('/resources',express.static('public'));
+//app.use('/',express.static('public'));
 
 
 app.get('/', (req, res) => {

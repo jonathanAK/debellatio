@@ -1,0 +1,64 @@
+.singleTerritoryBox{
+    background-blend-mode: overlay;
+    width:9vw;
+    height: 6vw;
+    border: 1px solid black;
+    display: grid;
+    font-size: 8px;
+    grid-template-areas:
+            "n n"
+            "t c";
+}
+
+.singleTerritoryBox_name{
+    grid-area:n;
+}
+.singleTerritoryBox_troop{
+    grid-area:t;
+}
+.singleTerritoryBox_capital{
+    grid-area:c;
+}
+
+.singleTerritoryBox_capital > img{
+    width:50%;
+}
+
+.singleTerritoryBox_troop > img{
+    width:80%;
+}
+
+/*ArmyColors*/
+.armySea{
+    /*background-image: url("/resources/img/sea.jpg");*/
+    background-image: url("/img/sea.jpg");
+}
+.armyNon{background-color: aliceblue;}
+.armyA{background-color: mediumslateblue;}
+.armyB{background-color: lightcoral;}
+.armyC{background-color: darkslategrey;}
+.armyD{background-color: yellow;}
+.armyE{background-color: crimson;}
+.armyF{background-color: greenyellow;}
+.armyG{background-color: coral;}
+
+
+.SingleTerritory_capital-port{
+    background-image: url("/img/port.png");
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.SingleTerritory_capital-city{
+    background-image: url("/img/capital.png");
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media (min-width : 800px) {
+    .singleTerritoryBox{
+        font-size: 16px;
+    }
+}

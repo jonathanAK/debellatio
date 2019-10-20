@@ -1,4 +1,4 @@
-const {TerritoryTypeEnum, TroopTypeEnum} = require('./Enums');
+const {TerritoryTypeEnum, TroopTypeEnum, FactoriesProducts} = require('./Enums');
 const {updateBalanceTable, resolveSproutSeason} = require('./sprout-destroy');
 const defaultTerritories = require('./defaults/territories');
 const territoryHolders = JSON.parse(require('./defaults/territoryHolders'));
@@ -26,7 +26,7 @@ module.exports = class Debellatio {
         for (let i = 0; i < this.territories.length; i++) {
             this.territories[i].army = territoryHolders[numOfPlayers][i];
             if (this.territories[i].army > 0 && this.territories[i].capital != null) {
-                this.territories[i].troop = (this.territories[i].type === TerritoryTypeEnum.Land ? TroopTypeEnum.Platoon : TroopTypeEnum.Ship);
+                this.territories[i].troop =FactoriesProducts[this.territories[i].capital];
             }
         }
     };

@@ -1,4 +1,4 @@
-const {TerritoryTypeEnum,TroopTypeEnum} = require('./Enums');
+const {FactoriesProducts} = require('./Enums');
 
 const updateBalanceTable = (context) => {
     const balance = new Array(context.armies.length).fill(0);
@@ -26,14 +26,13 @@ const resolveSproutSeason = (context,sendToPlayers) => {
 const sproutDestroyOrders = (context) => {
     Object.keys(context.orders).forEach((troop) => {
         try {
-            console.log('a1');
             const army = context.territories[troop].army -1;
             const order = context.orders[troop];
             if (order === 'destroy' && context.armies[army].balance < 0) {
                 context.territories[troop].troop = null;
                 context.armies[army].balance++;
             } else if (order === 'sprout' && context.armies[army].balance > 0) {
-                context.territories[troop].troop = (context.territories[troop].type === TerritoryTypeEnum.Land?TroopTypeEnum.Platoon:TroopTypeEnum.Ship);
+                context.territories[troop].troop = FactoriesProducts[context.territories[troop].capital];
                 context.armies[army].balance--;
             }
         } catch {

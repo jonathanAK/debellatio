@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Card, Typography} from '@material-ui/core';
 import {connect} from "react-redux";
 import {TroopTypesEnum} from "../../models/troopTypes";
 import {TerritoryTypeEnum} from "../../models/territoryTypes";
+import './CommandSheetRow.css';
 
 interface IProps {
     troopId:number
@@ -17,14 +17,15 @@ const CommandSheetRow: React.FC<IProps> = ({troopId, commandList,territories}) =
 
     commandList[troopId]={order,target,auxUnit};
     return (
-        <Card>
+        <div className={'CommandSheetRow'}>
             <img
-                className={'commandSheet-image'}
+                className={'CommandSheetRow_image'}
                 src={`${process.env.PUBLIC_URL}/img/${territories[troopId].troop === TroopTypesEnum.tank?'tank':'ship'}.png`}
                 alt="Tank"
             />
-            <Typography>{troopId}</Typography>
-
+            <div className={'CommandSheetRow_troopName'}>
+                {troopId}
+            </div>
             <select value={order} onChange={e => setOrder(e.target.value)}>
                 <option value={"defend"}>Defend</option>
                 <option  value={"attack"}>Attack</option>
@@ -50,7 +51,7 @@ const CommandSheetRow: React.FC<IProps> = ({troopId, commandList,territories}) =
                     ))
                 }
             </select>}
-        </Card>
+        </div>
     )
 };
 

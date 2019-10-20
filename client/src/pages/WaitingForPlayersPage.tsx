@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Dispatch} from "redux";
 import {sendSocketMessage} from "../store/socketMiddleware";
+import './css/WaitingForPlayersPage.css';
 
 interface IProps {
     joinCode:string
@@ -12,14 +13,16 @@ interface IProps {
 const WaitingForPlayersPage: React.FC<IProps> = ({joinCode,players,startGame}) => {
     return (
         <main id="waitingView">
-            <h1>Waiting for Players to Join</h1>
+            <h1>Waiting for Players</h1>
             <h1 id="pinCodeDisplay">{joinCode}</h1>
-            {joinCode !== "" && <button className="startButton"  onClick={()=>{startGame(joinCode)}}>Start Game</button>}
+            {joinCode !== "" && <button className="Waiting_startButton"  onClick={()=>{startGame(joinCode)}}>Start Game</button>}
+            <div className={'Waiting_playersBox'}>
             {
                 players.map((player:any)=>(
-                    <h2>{player.name}</h2>
+                    <h2 className={'Waiting_player'}>{player.name}</h2>
                 ))
             }
+            </div>
         </main>
     );
 };
