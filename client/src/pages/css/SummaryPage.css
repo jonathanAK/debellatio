@@ -1,0 +1,15 @@
+#summaryPage{
+    padding-top: 25vh;
+    align-content: start;
+    grid-gap: 50px;
+}
+
+@media (min-width : 800px) {
+    #summaryPage{
+        padding-top: 0;
+        align-content: center;
+        grid-gap: 0;
+    }
+}
+
+

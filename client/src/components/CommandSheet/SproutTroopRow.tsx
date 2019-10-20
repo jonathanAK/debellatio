@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Card, Typography} from '@material-ui/core';
 import {connect} from "react-redux";
 import Switch from "@material-ui/core/Switch";
+import {TerritoryTypeEnum} from "../../models/territoryTypes";
+import './SproutTroopRow.css';
 
 interface IProps {
     troopId:number
@@ -28,14 +29,20 @@ const SproutTroopRow: React.FC<IProps> = ({troopId, commandList,territories,allo
 
     };
     return (
-        <Card>
-            <Typography>{territories[troopId].name}</Typography>
-
-            <Switch
-                checked={order}
-                onChange={handleOrderChange}
+        <div className={'SproutTroopRow'}>
+            <img
+                className={'SproutTroopRow_image'}
+                src={`${process.env.PUBLIC_URL}/img/${territories[troopId].type === TerritoryTypeEnum.Land?'tank':'ship'}.png`}
+                alt="Tank"
             />
-        </Card>
+            {territories[troopId].name}
+            <div className={'SproutTroopRow_Switch'}>
+                <Switch
+                    checked={order}
+                    onChange={handleOrderChange}
+                />
+            </div>
+        </div>
     )
 };
 

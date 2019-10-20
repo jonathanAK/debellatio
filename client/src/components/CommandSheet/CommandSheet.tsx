@@ -1,11 +1,11 @@
 import React from 'react';
-import {List, ListItem} from '@material-ui/core';
 import CommandSheetRow from "./CommandSheetRow";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {sendSocketMessage} from "../../store/socketMiddleware";
 import {debellatioUpdateBoard} from "../../store/gameBoard.reducer";
 import SproutTroopRow from "./SproutTroopRow";
+import './CommandSheet.css';
 
 interface IProps {
     stage: string
@@ -36,17 +36,17 @@ const CommandSheet: React.FC<IProps> = ({territories, army, stage, submitCommand
                 return (<h3>Waiting for other players</h3>);
             case 'main':
                 return (
-                    <div>
-                        <List className={"commandSheetList"}>
+                    <div className={"CommandSheet"}>
+                        <div className={"CommandSheet_commandList"}>
                             {
                                 territories.map((territory: any, territoryId: number) => (
                                     (territory.army === army && territory.troop !== null) &&
-                                    <ListItem><CommandSheetRow key={territoryId} troopId={territoryId}
-                                                               commandList={commandList.commands}/></ListItem>
+                                    <CommandSheetRow key={territoryId} troopId={territoryId}
+                                                               commandList={commandList.commands}/>
                                 ))
                             }
-                        </List>
-                        <button onClick={dispatchOrders}>
+                        </div>
+                        <button  className={'CommandSheet_submit'} onClick={dispatchOrders}>
                             Send Orders
                         </button>
                     </div>
@@ -56,20 +56,20 @@ const CommandSheet: React.FC<IProps> = ({territories, army, stage, submitCommand
                 const buildNew = armyBalance>0 ;
                 const allowedActions = Math.abs(armyBalance);
                 return (
-                    <div>
+                    <div className={"CommandSheet"}>
                         <h2>{(buildNew?`Build New ${allowedActions} Troop${(allowedActions>1?'s':'')}`:`Disband ${allowedActions} Unit${(allowedActions>1?'s':'')}`)}</h2>
-                        <List className={"sproutCommandList"}>
+                        <div className={"CommandSheet_sproutList"}>
                             {buildNew ?(
                                 territories.map((territory:any,territoryId:number)=>(
-                                    (territory.army === army && territory.troop===null && territory.capital !== null) && <ListItem><SproutTroopRow key={territoryId} troopId={territoryId} commandList ={commandList} allowedActions={allowedActions} sprout={true}/></ListItem>
+                                    (territory.army === army && territory.troop===null && territory.capital !== null) && <SproutTroopRow key={territoryId} troopId={territoryId} commandList ={commandList} allowedActions={allowedActions} sprout={true}/>
                                 ))
                             ):(
                                 territories.map((territory:any,territoryId:number)=>(
-                                    (territory.army === army && territory.troop!==null) && <ListItem><SproutTroopRow key={territoryId} troopId={territoryId} commandList ={commandList} allowedActions={allowedActions}/></ListItem>
+                                    (territory.army === army && territory.troop!==null) && <SproutTroopRow key={territoryId} troopId={territoryId} commandList ={commandList} allowedActions={allowedActions}/>
                                 ))
                             )}
-                        </List>
-                        <button onClick={dispatchSprout}>
+                        </div>
+                        <button className={'CommandSheet_submit'} onClick={dispatchSprout}>
                             Send Orders
                         </button>
                     </div>

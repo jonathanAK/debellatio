@@ -92,7 +92,7 @@ const territories =[
     {
         "id":11,
         "name":'11',
-        "capital": "City",
+        "capital": "Port",
         "type":TerritoryTypeEnum.Coast,
         "borders":[10,18,19],
         "troop": null
@@ -100,7 +100,7 @@ const territories =[
     {
         "id":12,
         "name":'12',
-        "capital": "City",
+        "capital": "Port",
         "country":'B',
         "type":TerritoryTypeEnum.Coast,
         "borders":[21,22,13],
@@ -118,7 +118,7 @@ const territories =[
     {
         "id":14,
         "name":'14',
-        "capital": "City",
+        "capital": "Port",
         "type":TerritoryTypeEnum.Coast,
         "borders":[6,13,22,23,15],
         "troop": null
@@ -198,7 +198,7 @@ const territories =[
     {
         "id":24,
         "name":'24',
-        "capital": "City",
+        "capital": "Port",
         "type":TerritoryTypeEnum.Coast,
         "borders":[15,23,32,33,25],
         "troop": null
@@ -222,7 +222,7 @@ const territories =[
     {
         "id":27,
         "name":'27',
-        "capital": "City",
+        "capital": "Port",
         "type":TerritoryTypeEnum.Coast,
         "borders":[18,26,36,28],
         "troop": null
@@ -230,7 +230,7 @@ const territories =[
     {
         "id":28,
         "name":'28',
-        "capital": "City",
+        "capital": "Port",
         "type":TerritoryTypeEnum.Coast,
         "borders":[19,27,37,29],
         "troop": null
@@ -246,7 +246,7 @@ const territories =[
     {
         "id":30,
         "name":'30',
-        "capital": "City",
+        "capital": "Port",
         "type":TerritoryTypeEnum.Coast,
         "borders":[22,21,31],
         "troop": null
@@ -318,7 +318,7 @@ const territories =[
     {
         "id":39,
         "name":'39',
-        "capital": "City",
+        "capital": "Port",
         "type":TerritoryTypeEnum.Coast,
         "borders":[32,32,40],
         "troop": null
@@ -342,7 +342,7 @@ const territories =[
     {
         "id":42,
         "name":'42',
-        "capital": "City",
+        "capital": "Port",
         "type":TerritoryTypeEnum.Coast,
         "borders":[34,41,48,43],
         "troop": null
@@ -374,7 +374,7 @@ const territories =[
     {
         "id":46,
         "name":'46',
-        "capital": "City",
+        "capital": "Port",
         "type":TerritoryTypeEnum.Coast,
         "borders":[41,40,47],
         "troop": null
@@ -390,7 +390,7 @@ const territories =[
     {
         "id":48,
         "name":'48',
-        "capital": "City",
+        "capital": "Port",
         "type":TerritoryTypeEnum.Coast,
         "borders":[42,41,47,49],
         "troop": null

@@ -1,6 +1,6 @@
 export const sampleGameObject = {
-    armies: [{name: "Kurt Cobain"}, {name: "Amy Winehouse"}, {name: "Jimi Hendrix"}],
-    settings: {},
+    armies: [{name: "Kurt Cobain", balance:-2}, {name: "Amy Winehouse", balance:2}, {name: "Jimi Hendrix", balance:2}],
+    settings: {seasonsPerYear: 2, seasonLength: 6, firstSeason: 12},
     territories: [
         {
             "id": 0,
@@ -74,7 +74,7 @@ export const sampleGameObject = {
                 6,
                 13
             ],
-            "troop": 0,
+            "troop": null,
             "army": 1
         },
         {
@@ -163,7 +163,7 @@ export const sampleGameObject = {
         {
             "id": 12,
             "name": "12",
-            "capital": "City",
+            "capital": "Port",
             "country": "B",
             "type": 1,
             "borders": [
@@ -186,13 +186,13 @@ export const sampleGameObject = {
                 22,
                 14
             ],
-            "troop": null,
+            "troop": 0,
             "army": 1
         },
         {
             "id": 14,
             "name": "14",
-            "capital": "City",
+            "capital": "Port",
             "type": 1,
             "borders": [
                 6,
@@ -201,7 +201,7 @@ export const sampleGameObject = {
                 23,
                 15
             ],
-            "troop": 1,
+            "troop": null,
             "army": 1
         },
         {
@@ -422,7 +422,7 @@ export const sampleGameObject = {
         {
             "id": 30,
             "name": "30",
-            "capital": "City",
+            "capital": "Port",
             "type": 1,
             "borders": [
                 22,
@@ -550,14 +550,14 @@ export const sampleGameObject = {
         {
             "id": 39,
             "name": "39",
-            "capital": "City",
+            "capital": "Port",
             "type": 1,
             "borders": [
                 32,
                 32,
                 40
             ],
-            "troop": 1,
+            "troop": null,
             "army": 1
         },
         {

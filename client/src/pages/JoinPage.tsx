@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import { debellatioSetView } from '../store/views.reducer';
 import {ActiveViewEnum} from '../models/ActiveView';
 import {sendSocketMessage} from "../store/socketMiddleware";
+import './css/JoinPage.css';
 
 interface IProps {
     goToCreateGame:() => void
@@ -25,12 +26,12 @@ const JoinPage: React.FC<IProps> = ({goToCreateGame,joinGame}) => {
         <main id="joinView">
             <h1>Debellatio</h1>
             <form>
-                <input className="login-input"  placeholder="Name" value={name} onChange={handleNameChange}/>
-                <input className="login-input"  placeholder="Game PIN" value={gamePin} onChange={handleGamePinChange}/>
+                <input className="JoinPage_login-input"  placeholder="Name" value={name} onChange={handleNameChange}/>
+                <input className="JoinPage_login-input"  placeholder="Game PIN" value={gamePin} onChange={handleGamePinChange}/>
 
             </form>
-            <button className="startButton" onClick={joinNewGame}>Join Now</button>
-            <button className="startButton" onClick={goToCreateGame}>Create New game</button>
+            <button className="JoinPage_startButton" onClick={joinNewGame}>Join Now</button>
+            <button className="JoinPage_startButton" onClick={goToCreateGame}>Create New game</button>
         </main>
     );
 };

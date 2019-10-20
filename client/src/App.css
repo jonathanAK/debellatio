@@ -2,9 +2,10 @@ body {
   background: black;
 }
 
-#joinView, #newGameView, #waitingView{
+#joinView, #newGameView, #waitingView, #summaryPage{
   width:100%;
-  height:100vh;
+  height:100%;
+  min-height:100vh;
   margin:0;
   background: black;
   /*background-image: url("/resources/img/background-login.jpg");*/
@@ -14,29 +15,13 @@ body {
   background-size: cover;
   display: grid;
   align-content: center;
-  /*justify-content: center;*/
 }
-
-
-main {
-  display: grid;
-  align-content: center;
-  justify-content: center;
-  margin-top: 30vh;
-}
-
-form{
-  display: grid;
-  align-content: center;
-  justify-content: center;
-}
-
 
 h1 {
   color: White;
   text-shadow: 4px 4px #000000;
   margin: auto auto 30px auto;
-  font-family: "Arial Black", Gadget, sans-serif;
+  font-family: 'Archivo Black', sans-serif;
   font-weight: 100;
   font-size: 70px;
 }
@@ -45,49 +30,22 @@ h2 {
   color: White;
   text-shadow: 4px 4px #000000;
   margin: auto auto 30px auto;
-  font-family: "Arial Black", Gadget, sans-serif;
+  font-family: 'Archivo Black', sans-serif;
   font-weight: 100;
-  font-size: 40px;
+  font-size: 35px;
 }
 
-.login-input {
-  display: block;
-  margin: auto auto 10px;
-  font-weight: 700;
-  font-size: 30px;
-  text-align: center;
-  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: rgb(255, 255, 255);
-  width: 285px;
-  height: 40px;
-  border-width: 0.125rem;
-  border-style: solid;
-  border-color: rgb(204, 204, 204);
-  border-image: initial;
-  padding: 0.25rem 0.375rem;
-  transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-}
+/*general stuff*/
+.capitalize {text-transform:capitalize;}
 
-.startButton {
-  display: inline-block;
-  min-width: 6.25rem;
-  max-width: 18.75rem;
-  width: 93.34%;
-  height: 3.125rem;
-  background-color: rgb(51, 51, 51);
-  text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
-  color: rgb(255, 255, 255);
-  font-weight: 700;
-  font-size: 20px;
-  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: auto auto 70px auto;
-  padding: 0.25rem 0.875rem;
-  border-width: 0.0625rem;
-  border-style: solid;
-  border-image: initial;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  border-radius: 0.125rem;
-  text-decoration: none;
-  outline: 0px;
-  cursor: pointer;
+/*Mobile*/
+@media (max-width : 500px) {
+  h1 {
+    margin: auto;
+    font-size: 50px;
+  }
+  h2 {
+    margin: auto;
+    font-size: 30px;
+  }
 }
