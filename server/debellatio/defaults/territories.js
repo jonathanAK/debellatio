@@ -318,7 +318,7 @@ const territories =[
     {
         "id":39,
         "name":'39',
-        "capital": "Port",
+        "capital": "City",
         "type":TerritoryTypeEnum.Coast,
         "borders":[32,32,40],
         "troop": null
