@@ -6,8 +6,11 @@
   },
   "scripts": {
     "build": "(cd client && npm run build && cd..)",
-    "postbuild": "xcopy /e /y \"./client/build\" \"./server/public\"",
-    "predeploy": "npm run build",
+    "emptyPublic": "rmdir /s /q \"./server/public\" && mkdir \"./server/public\"",
+    "moveFrontToPublic" : "xcopy /e /y \"./client/build\" \"./server/public\"",
+    "postbuild": "(npm run emptyPublic && npm run moveFrontToPublic)",
+    "herokuCommit": "git checkout heroku && git add ./server/public/\\* && git commit ",
+    "predeploy": "(npm run build && npm run herokuCommit)",
     "deploy": "git subtree push --prefix server heroku master",
     "test": "jest"
   }

@@ -15,8 +15,8 @@ export const sendSocketMessage = (msgType:string,msgVal:any=null) => {
 };
 
 const socketMiddleware:Middleware = ({dispatch}: MiddlewareAPI)=>{
-    const  socket = openSocket('http://localhost:4000'); //for dev use change to bellow when done
-    // const  socket = openSocket(process.env.PUBLIC_URL);
+    const socketURL = (process.env.NODE_ENV === 'development'?'http://localhost:4000' : process.env.PUBLIC_URL);
+    const  socket = openSocket(socketURL);
 
     //persist socket to localstorage
     socket.on('gameStarted', (msg:any) => {

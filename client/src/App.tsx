@@ -44,7 +44,7 @@ const App: React.FC<IProp> = ({activeView,gameId,rejoin,gameOver}) => {
   }
   return (
       <>
-        <QaBar/>
+        {process.env.NODE_ENV === 'development' && <QaBar/>}
       {view}
       </>
   );
