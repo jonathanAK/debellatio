@@ -6,7 +6,7 @@
   },
   "scripts": {
     "build": "(cd client && npm run build && cd..)",
-    "emptyPublic": "rmdir /s /q \"./server/public\" && mkdir \"./server/public\"",
+    "emptyPublic": "(if exist \"./server/public\" rmdir /s /q \"./server/public\" ) && mkdir \"./server/public\"",
     "moveFrontToPublic" : "xcopy /e /y \"./client/build\" \"./server/public\"",
     "postbuild": "(npm run emptyPublic && npm run moveFrontToPublic)",
     "herokuCommit": "git checkout heroku && git add ./server/public/\\* && git commit ",
