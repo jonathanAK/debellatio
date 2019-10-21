@@ -29,10 +29,10 @@ There are 2 types of cities:
 ![port](readme/port.jpg)\
 
 ### Troops
-1. Ground troop - \
+1. Ground troop - Can attack land and coast territories.\
 ![troop](readme/tank.jpg)
 
-2. Battle ship - \
+2. Battle ship - Can attack sea and coast territories.\
 ![ship](readme/ship.jpg)
 
 ### Seasons
