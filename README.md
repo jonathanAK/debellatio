@@ -24,9 +24,9 @@ Some of the territories are cities. they are marked with the city out line inste
 Controling cites is key to strengthing your army (see: Sprout \ Disband).\
 There are 2 types of cities:
 1. Industrial citeis - Can produce ground troops.\
-![capital](readme/capital.jpg)\
+![capital](readme/capital.jpg)
 2. Harbor cities - Can produce battle ships.\
-![port](readme/port.jpg)\
+![port](readme/port.jpg)
 
 ### Troops
 1. Ground troop - Can attack land and coast territories.\
