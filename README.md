@@ -34,4 +34,4 @@ Debellatio is on online strategy board game for 2-7 players.
 
 * Season Length - How long will each season be(Minutes).
 
-*First Season Length - How long will the first season be(Minutes). For new players we recommend double the length of a regular season.
+* First Season Length - How long will the first season be(Minutes). For new players we recommend double the length of a regular season.
