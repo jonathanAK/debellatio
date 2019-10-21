@@ -7,7 +7,7 @@
   "scripts": {
     "build": "(cd client && npm run build && cd..)",
     "postbuild": "xcopy /e /y \"./client/build\" \"./server/public\"",
-    "predeploy": "npm run build",
+    "predeploy": "(npm run build && git add ./server/public/\\\\*)",
     "deploy": "git subtree push --prefix server heroku master",
     "test": "jest"
   }
