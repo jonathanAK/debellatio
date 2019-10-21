@@ -29,9 +29,11 @@ There are 2 types of cities:
 ![port](readme/port.jpg)\
 
 ### Troops
-1. Ground troop - ![troop](readme/tank.jpg)
+1. Ground troop - \
+![troop](readme/tank.jpg)
 
-2. Battle ship - ![ship](readme/ship.jpg)
+2. Battle ship - \
+![ship](readme/ship.jpg)
 
 ### Seasons
 
