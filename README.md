@@ -10,6 +10,7 @@ Debellatio is on online strategy board game for 2-7 players.
 
 ### The Board
 The board is comprised of 50 territories each represented by a square on The board.
+![map](readme/map.jpg)
 
 ### Territories
 
@@ -20,11 +21,14 @@ Some of the territories are cities. they are marked with the city out line inste
 Controling cites is key to strengthing your army (see: Sprout \ Disband).
 There are 2 types of cities:
 1. Industrial citeis - Can produce ground troops.
-![qr Code](https://www.amitkohn.com/resources/debellatio.png)
+![capital](readme/capital.jpg)
 2. Harbor cities - Can produce battle ships.
-![qr Code](https://www.amitkohn.com/resources/debellatio.png)
+![port](readme/port.jpg)
 
 ### Troops
+1. Groud troop - ![troop](readme/tank.jpg)
+
+2. Battle ship - ![ship](readme/ship.jpg)
 
 ### Seasons
 
