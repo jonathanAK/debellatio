@@ -29,7 +29,7 @@ There are 2 types of cities:
 ![port](readme/port.jpg)
 
 ### Troops
-1. Groud troop - ![troop](readme/tank.jpg)
+1. Ground troop - ![troop](readme/tank.jpg)
 
 2. Battle ship - ![ship](readme/ship.jpg)
 
@@ -44,12 +44,12 @@ The first player to conquer 15 cities wins.
 
 ### Settings
 
-* Spectator Mode - Sets the current device into spectator mode. This device will not be used by one os the player. Instead it can be connected to a T.V. or a large screen.
+* Spectator Mode - Sets the current device into spectator mode. This device will not be used by one of the player. Instead it can be connected to a T.V. or a large screen.
 
-* Seasons Per Year - Determines how many seasons will be played in each year. Since sprouting new units only happens beafore the Fall season, playing 4 seasons a year makes the game mpre difficult.
+* Seasons Per Year - Determines how many seasons will be played in each year. Since sprouting new units only happens before the Fall season, playing 4 seasons a year makes the game more difficult.
 
 * Maximum Number Of players - Maximum number of players allowed between 2 and 7. The game master may choose to start the game even if less player have joined the game.
 
-* Season Length - How long will each season be(Minutes).
+* Season Length - How long will each season be (Minutes).
 
-* First Season Length - How long will the first season be(Minutes). For new players we recommend double the length of a regular season.
+* First Season Length - How long will the first season be (Minutes). For new players we recommend double the length of a regular season.
