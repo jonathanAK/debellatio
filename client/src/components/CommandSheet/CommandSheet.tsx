@@ -33,7 +33,11 @@ const CommandSheet: React.FC<IProps> = ({territories, army, stage, submitCommand
     function getCommandSheetView(): JSX.Element | undefined {
         switch (stage) {
             case 'waiting':
-                return (<h3>Waiting for other players</h3>);
+                return (
+                    <div className={"CommandSheet"}>
+                        <h3>Waiting for other players</h3>
+                    </div>
+                );
             case 'main':
                 return (
                     <div className={"CommandSheet"}>

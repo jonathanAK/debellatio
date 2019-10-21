@@ -19,7 +19,11 @@ const socketMiddleware:Middleware = ({dispatch}: MiddlewareAPI)=>{
     // const  socket = openSocket(process.env.PUBLIC_URL);
 
     //persist socket to localstorage
-    socket.on('gameStarted', () => {
+    socket.on('gameStarted', (msg:any) => {
+        localStorage.setItem('socketId', socket.id);
+        localStorage.setItem('gameId', msg.settings.roomId);
+    });
+    socket.on('rejoinGame', (msg:any) => {
         localStorage.setItem('socketId', socket.id);
     });
 
