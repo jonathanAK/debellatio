@@ -16,10 +16,13 @@ The board is comprised of 50 territories each represented by a square on The boa
 ![map](readme/map.PNG)
 
 ### Territories
-
+There are 3 type of territories
+1. Land - Most of the territories. Each land territory niegbors it adjacent territoris only (straign lines).
+2. Coast - Territories surrounding sea territories in all dircetions (diagonal included).\
+Coast territories neigbor their adjacent teritories and any digonal sea territory.
+3. Sea - Blue territories marked with a wave pattern. Sea teritorries neigbor to their diagonal territories as well as their adjacent ones. Ther are no cities at sea. 
 
 ### Cities
-
 Some of the territories are cities. they are marked with the city out line instead of a blank background.\
 Controling cites is key to strengthing your army (see: Sprout \ Disband).\
 There are 2 types of cities:
@@ -36,6 +39,7 @@ There are 2 types of cities:
 ![ship](readme/ship.jpg)
 
 ### Seasons
+Each year is comprised of 2-4 season. 
 
 ### Actions
 
