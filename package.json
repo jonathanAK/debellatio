@@ -9,7 +9,8 @@
     "emptyPublic": "rmdir /s /q \"./server/public\" && mkdir \"./server/public\"",
     "moveFrontToPublic" : "xcopy /e /y \"./client/build\" \"./server/public\"",
     "postbuild": "(npm run emptyPublic && npm run moveFrontToPublic)",
-    "predeploy": "(npm run build && git checkout heroku && git add ./server/public/\\\\* && git commit )",
+    "herokuCommit": "git checkout heroku && git add ./server/public/\\* && git commit ",
+    "predeploy": "(npm run build && npm run herokuCommit)",
     "deploy": "git subtree push --prefix server heroku master",
     "test": "jest"
   }
