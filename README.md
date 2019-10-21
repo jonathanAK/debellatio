@@ -20,13 +20,13 @@ The board is comprised of 50 territories each represented by a square on The boa
 
 ### Cities
 
-Some of the territories are cities. they are marked with the city out line instead of a blank background.
-Controling cites is key to strengthing your army (see: Sprout \ Disband).
+Some of the territories are cities. they are marked with the city out line instead of a blank background.\
+Controling cites is key to strengthing your army (see: Sprout \ Disband).\
 There are 2 types of cities:
-1. Industrial citeis - Can produce ground troops.
-![capital](readme/capital.jpg)
-2. Harbor cities - Can produce battle ships.
-![port](readme/port.jpg)
+1. Industrial citeis - Can produce ground troops.\
+![capital](readme/capital.jpg)\
+2. Harbor cities - Can produce battle ships.\
+![port](readme/port.jpg)\
 
 ### Troops
 1. Ground troop - ![troop](readme/tank.jpg)
