@@ -44,7 +44,7 @@ module.exports = (io,gameQue,liveGames) => {
             if(queIndex!==-1 && gameQue[queIndex].players.length>1){
                 const {code:roomId,players, seasons:seasonsPerYear,seasonLength,firstSeason} = gameQue[queIndex];
                 const sendToPlayers = (label,msg)=>{io.in(roomId).emit(label,msg)};
-                const gameSettings = {seasonsPerYear,seasonLength, firstSeason};
+                const gameSettings = {roomId,seasonsPerYear,seasonLength, firstSeason};
                 liveGames[roomId]=new Debellatio(players,gameSettings);
                 gameQue.splice(roomId, 1);
                 //set length of first season
@@ -75,6 +75,31 @@ module.exports = (io,gameQue,liveGames) => {
                 liveGames[roomId].dispatchSprout({playerSocket : socket.id,...msg});
                 socket.emit('commandReceived');
                 liveGames[roomId].isSproutOver(sendToPlayers);
+            }
+        });
+
+        socket.on('rejoin',msg =>{
+            try{
+                const {gameId,socketId} = msg;
+                if(gameId && gameId in liveGames){
+                    const playerId = liveGames[gameId].playerList.findIndex(item => item.id === socketId);
+                    if(playerId > -1){
+                        socket.join(gameId);
+                        liveGames[gameId].playerList[playerId].id = socket.id;
+                        socket.emit('playerId', playerId+1);
+                        socket.emit('rejoinGame',liveGames[gameId].getGameData(true));
+                    }
+                }
+            }catch{
+                console.log('bad rejoin request');
+            }
+        });
+
+        socket.on('gameOver',msg =>{
+            try{
+               liveGames[msg] = null;
+            }catch{
+                console.log('bad gameOver request');
             }
         });
     });

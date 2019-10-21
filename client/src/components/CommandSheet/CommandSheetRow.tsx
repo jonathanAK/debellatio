@@ -38,7 +38,7 @@ const CommandSheetRow: React.FC<IProps> = ({troopId, commandList,territories}) =
                 {
                     territories[troopId].borders.map((border: any) => (
                         ((territories[troopId].troop === TroopTypesEnum.tank && ((territories[border].type !== TerritoryTypeEnum.Sea) !== (order === "getConvoyed")))||(territories[troopId].troop === TroopTypesEnum.ship && territories[border].type !== TerritoryTypeEnum.Land)) &&
-                    <option key={`${territories[troopId]}${border}`} value={border}>{border}</option>
+                    <option key={`${troopId}_${border}_${Math.random()}`} value={border}>{border}</option>
                     ))
                 }
             </select>

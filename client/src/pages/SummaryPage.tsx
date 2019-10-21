@@ -11,6 +11,8 @@ interface IProps {
 }
 
 const SummaryPage: React.FC<IProps> = ({winner,goToJoinGame}) => {
+    localStorage.removeItem('socketId');
+
     return (
         <main id="summaryPage">
             <h1>The Winner</h1>

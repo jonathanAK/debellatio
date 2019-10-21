@@ -32,10 +32,7 @@
 .armyE{background-color: crimson;}
 .armyF{background-color: greenyellow;}
 .armyG{background-color: coral;}
-.armySea{
-    /*background-image: url("/resources/img/sea.jpg");*/
-    background-image: url("/img/sea.jpg");
-}
+.armySea{ background-image: url("/img/sea.jpg"); }
 
 .SingleTerritory_capital-port{
     background-image: url("/img/port.png");

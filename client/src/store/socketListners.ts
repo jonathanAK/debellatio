@@ -76,7 +76,16 @@ const socketListners:(dispatch: Dispatch)=>Array<SocketListner> =(dispatch:Dispa
                     dispatch(debellatioUpdateBoard ({winner:message}));
                     dispatch(debellatioSetView (ActiveViewEnum.Summary));
                 }
-            }
+            },
+            {
+                event:'rejoinGame',
+                fn:(message:[object]) => {
+                    dispatch(debellatioUpdateBoard({...message,stage:'main'}));
+                    dispatch(debellatioSetView (ActiveViewEnum.PLayPage));
+                    setInterval(()=>dispatch(debellatioTimeTik()),1000);
+                    dispatch(debellatioUpdateBoard({stage: 'waiting'}));
+                }
+            },
         ]
     );
 };

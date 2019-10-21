@@ -21,7 +21,6 @@ const JoinPage: React.FC<IProps> = ({goToCreateGame,joinGame}) => {
         joinGame({name, id:gamePin});
     };
 
-
     return (
         <main id="joinView">
             <h1>Debellatio</h1>

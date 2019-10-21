@@ -3,6 +3,15 @@
     align-items: center;
 }
 
+.CommandSheet > h3{
+    color: White;
+    text-shadow: 4px 4px #000000;
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 100;
+    margin: auto;
+    font-size: 30px;
+}
+
 .CommandSheet_commandList, .CommandSheet_sproutList{
     margin: 10px;
     display: grid;
@@ -49,5 +58,10 @@
         grid-template-columns: repeat(5,auto);
         grid-gap: 20px;
         justify-content: center;
+    }
+
+    h2 {
+        margin: auto auto 30px auto;
+        font-size: 35px;
     }
 }
