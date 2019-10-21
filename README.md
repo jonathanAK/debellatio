@@ -10,7 +10,7 @@ Debellatio is on online strategy board game for 2-7 players.
 
 ### The Board
 The board is comprised of 50 territories each represented by a square on The board.
-![map](readme/map.jpg)
+![map](readme/map.png)
 
 ### Territories
 
