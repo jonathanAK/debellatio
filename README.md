@@ -40,6 +40,10 @@ There are 2 types of cities:
 
 ### Seasons
 Each year is comprised of 2-4 season. 
+During the season player can discuss strategy and make deals with each other.
+Once a player has decided on his actions for the season, he fills out the command sheet.
+
+A season concludes when all players submit their commands sheets or when the allotted time has ended.
 
 ### Actions
 
