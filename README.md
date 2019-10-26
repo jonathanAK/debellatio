@@ -1,7 +1,7 @@
 # Debellatio
 
 
-[![qr Code](readme/qr.PNG)](https://debellatio-online.herokuapp.com)
+[![qr Code](readme/qr.png)](https://debellatio-online.herokuapp.com)
 
 ## Overview
 Debellatio is on online strategy board game for 2-7 players.
