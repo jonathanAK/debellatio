@@ -1,5 +1,5 @@
 .singleTerritoryBox{
-    background-blend-mode: overlay;
+    background-blend-mode: darken;
     width:9vw;
     height: 6vw;
     border: 1px solid black;
